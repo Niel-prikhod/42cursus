@@ -12,10 +12,10 @@ SOURCES = sources/ft_isalpha.c \
 		  sources/ft_memmove.c \
 		  sources/ft_strlcpy.c \
 		  sources/ft_strlcat.c \
-		#   sources/ft_toupper.c \
-		#   sources/ft_tolower.c \
-		#   sources/ft_strchr.c \
-		#   sources/ft_strrchr.c \
+		  sources/ft_toupper.c \
+		  sources/ft_tolower.c \
+		  sources/ft_strchr.c \
+		  sources/ft_strrchr.c \
 		#   sources/ft_strncmp.c \
 		#   sources/ft_memchr.c \
 		#   sources/ft_memcmp.c \
