@@ -1,32 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_swap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: niel <niel@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/14 01:17:15 by niel              #+#    #+#             */
-/*   Updated: 2025/02/14 01:19:48 by niel             ###   ########.fr       */
+/*   Created: 2025/02/07 21:35:28 by dprikhod          #+#    #+#             */
+/*   Updated: 2025/06/06 01:33:41 by niel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_strlen(char *str)
+void	ft_swap(int *a, int *b)
 {
-	int	n;
+	int	buf;
 
-	n = 0;
-	while (*str != '\0')
-	{
-		n++;
-		str++;
-	}
-	return (n);
+	buf = *a;
+	*a = *b;
+	*b = buf;
 }
-
-// int	main(void)
-// {
-// 	char	str[] = "dfsghjggfd";
-
-// 	ft_strlen(str);
-// 	return (ft_strlen(str));
-// }
