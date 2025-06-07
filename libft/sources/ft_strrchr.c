@@ -6,16 +6,17 @@
 /*   By: niel <niel@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 13:29:14 by niel              #+#    #+#             */
-/*   Updated: 2025/06/07 13:58:09 by niel             ###   ########.fr       */
+/*   Updated: 2025/06/07 15:04:11 by niel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <stddef.h>
 
 char	*ft_strrchr(const char *s, int c)
 {
 	char	*last;
-	
-	last = '\0';
-	while (s)
+
+	while (*s)
 	{
 		if (*s == c)
 			last = (char *)s;

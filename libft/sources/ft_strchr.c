@@ -6,13 +6,15 @@
 /*   By: niel <niel@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 12:48:25 by niel              #+#    #+#             */
-/*   Updated: 2025/06/07 13:54:35 by niel             ###   ########.fr       */
+/*   Updated: 2025/06/07 14:19:08 by niel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stddef.h>
+
 char	*ft_strchr(const char *s, int c)
 {
-	while (s)
+	while (*s)
 	{
 		if (*s == c)
 			return ((char *)s);
@@ -20,5 +22,5 @@ char	*ft_strchr(const char *s, int c)
 	}
 	if ((char)c == '\0')
 		return ((char *)s);
-	return ('\0');
+	return (NULL);
 }

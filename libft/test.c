@@ -51,9 +51,22 @@ void	test_ft_strchr()
 {
     const char *s = "hello";
     char *res = ft_strchr(s, 'e');
-    printf("ft_strchr(\"hello\", 'e') = %s (expected ello)\n", res);
+	char *ref = strchr(s, 'e');
+    printf("ft_strchr(\"hello\", 'e') = %s (expected %s)\n", res, ref);
     res = ft_strchr(s, 'z');
-    printf("ft_strchr(\"hello\", 'z') = %s (expected (null))\n", res);
+	ref = strchr(s, 'z');
+    printf("ft_strchr(\"hello\", 'z') = %s (expected %s)\n", res, ref);
+}
+
+void	test_ft_strrchr()
+{
+    const char *s = "hello";
+    char *res = ft_strrchr(s, 'l');
+    char *ref = strrchr(s, 'l');
+    printf("ft_strrchr(\"hello\", 'l') = %s (expected %s)\n", res, ref);
+    res = ft_strrchr(s, 'z');
+    ref = strrchr(s, 'z');
+    printf("ft_strrchr(\"hello\", 'z') = %s (expected %s)\n", res, ref);
 }
 
 int main(void)
@@ -63,8 +76,9 @@ int main(void)
 	// test_ft_memset();
 	// test_ft_strlcpy();
 	// test_ft_strlcat();
-	test_ft_toupper();
-	test_ft_tolower();
+	// test_ft_toupper();
+	// test_ft_tolower();
 	test_ft_strchr();
+	test_ft_strrchr();
 	return 0;
 }
