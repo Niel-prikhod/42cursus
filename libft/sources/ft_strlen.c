@@ -6,13 +6,15 @@
 /*   By: niel <niel@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 01:17:15 by niel              #+#    #+#             */
-/*   Updated: 2025/06/06 01:02:09 by niel             ###   ########.fr       */
+/*   Updated: 2025/06/13 00:25:05 by niel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_strlen(char *str)
+#include "libft.h"
+
+size_t	ft_strlen(const char *str)
 {
-	int	n;
+	size_t	n;
 
 	n = 0;
 	while (*str != '\0')
@@ -22,11 +24,3 @@ int	ft_strlen(char *str)
 	}
 	return (n);
 }
-
-// int	main(void)
-// {
-// 	char	str[] = "dfsghjggfd";
-
-// 	ft_strlen(str);
-// 	return (ft_strlen(str));
-// }
