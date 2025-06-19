@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niel <niel@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 23:12:29 by niel              #+#    #+#             */
-/*   Updated: 2025/06/13 00:52:55 by niel             ###   ########.fr       */
+/*   Updated: 2025/06/19 15:09:51 by dprikhod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	test_ft_isprint()
 
 void	test_ft_strlen()
 {
-	printf("ft_strlen(\"hello\") = %d (expected 5)\n", ft_strlen("hello"));
+	printf("ft_strlen(\"hello\") = %zu (expected 5)\n", ft_strlen("hello"));
 }
 
 void	test_ft_memset()
@@ -137,7 +137,7 @@ void	test_ft_strnstr()
 	char *res = ft_strnstr(big, little, 11);
 	char *ref = strnstr(big, little, 11);
 	printf("ft_strnstr(\"hello world\", \"world\", 11) = %s (expected %s)\n", res, ref);
-	
+
 	res = ft_strnstr(big, "notfound", 11);
 	ref = strnstr(big, "notfound", 11);
 	printf("ft_strnstr(\"hello world\", \"notfound\", 11) = %s (expected %s)\n", res, ref);
@@ -150,7 +150,7 @@ void	test_ft_strncmp()
 	int res = ft_strncmp(s1, s2, 5);
 	int ref = strncmp(s1, s2, 5);
 	printf("ft_strncmp(\"hello\", \"hello\", 5) = %d (expected %d)\n", res, ref);
-	
+
 	s2[0] = 'H';
 	res = ft_strncmp(s1, s2, 5);
 	ref = strncmp(s1, s2, 5);
@@ -163,7 +163,7 @@ void	test_ft_memchr()
 	char *res = ft_memchr(s, 'o', 11);
 	char *ref = memchr(s, 'o', 11);
 	printf("ft_memchr(\"hello world\", 'o', 11) = %s (expected %s)\n", res, ref);
-	
+
 	res = ft_memchr(s, 'z', 11);
 	ref = memchr(s, 'z', 11);
 	printf("ft_memchr(\"hello world\", 'z', 11) = %s (expected %s)\n", res, ref);
@@ -176,7 +176,7 @@ void	test_ft_memcmp()
 	int res = ft_memcmp(s1, s2, 5);
 	int ref = memcmp(s1, s2, 5);
 	printf("ft_memcmp(\"hello\", \"hello\", 5) = %d (expected %d)\n", res, ref);
-	
+
 	s2[0] = 'H';
 	res = ft_memcmp(s1, s2, 5);
 	ref = memcmp(s1, s2, 5);
@@ -189,7 +189,7 @@ void	test_ft_atoi()
 	int res = ft_atoi(str);
 	int ref = atoi(str);
 	printf("ft_atoi(\"%s\") = %d (expected %d)\n", str, res, ref);
-	
+
 	str = "42";
 	res = ft_atoi(str);
 	ref = atoi(str);
@@ -225,6 +225,15 @@ void	test_ft_strdup()
 	}
 }
 
+void	test_ft_substr()
+{
+	char			*str = "hello";
+	unsigned int	start = 2;
+	char			*sub;
+	sub = ft_substr(str, start, ft_strlen(str));
+	printf("ft_substr(\"%s, %d, %zu\") = %s\n", str, start, ft_strlen(str), sub);
+}
+
 int main(void)
 {
 	// test_ft_isalpha();
@@ -250,5 +259,6 @@ int main(void)
 	// test_ft_atoi();
 	// test_ft_calloc();
 	// test_ft_strdup();
+	// test_ft_substr();
 	return (0);
 }

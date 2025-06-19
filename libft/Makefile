@@ -23,7 +23,7 @@ SOURCES = sources/ft_isalpha.c \
 		  sources/ft_atoi.c \
 		  sources/ft_calloc.c \
 		  sources/ft_strdup.c \
-		#   sources/ft_substr.c \
+		  sources/ft_substr.c \
 		#   sources/ft_strjoin.c \
 		#   sources/ft_strtrim.c \
 		#   sources/ft_split.c \
@@ -33,9 +33,8 @@ SOURCES = sources/ft_isalpha.c \
 		#   sources/ft_putchar_fd.c \
 		#   sources/ft_putstr_fd.c \
 		#   sources/ft_putendl_fd.c \
-		#   sources/ft_putnbr_fd.c \
-		#
-		#   sources/ft_lstnew.c \
+		#   sources/ft_putnbr_fd.c
+# BONUSES = bonuses/ft_lstnew.c \
 		#   sources/ft_lstadd_front.c \
 		#   sources/ft_lstsize.c \
 		#   sources/ft_lstlast.c \
