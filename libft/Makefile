@@ -24,9 +24,9 @@ SOURCES = sources/ft_isalpha.c \
 		  sources/ft_calloc.c \
 		  sources/ft_strdup.c \
 		  sources/ft_substr.c \
-		#   sources/ft_strjoin.c \
-		#   sources/ft_strtrim.c \
-		#   sources/ft_split.c \
+		  sources/ft_strjoin.c \
+		  sources/ft_strtrim.c \
+		  sources/ft_split.c \
 		#   sources/ft_itoa.c \
 		#   sources/ft_strmapi.c \
 		#   sources/ft_striteri.c \

@@ -6,14 +6,14 @@
 /*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 15:23:10 by dprikhod          #+#    #+#             */
-/*   Updated: 2025/06/19 17:22:02 by dprikhod         ###   ########.fr       */
+/*   Updated: 2025/06/19 17:25:33 by dprikhod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 // #TODO too many arguments in function
 
-static int	isinset(char c, const char *set)
+static int	is_in_set(char c, const char *set)
 {
 	while (*set)
 	{
@@ -32,9 +32,9 @@ char	*ft_strtrim(char const *s1, char const *set)
 
 	start = 0;
 	end = ft_strlen(s1);
-	while (s1[start] && in_set(s1[start], set))
+	while (s1[start] && is_in_set(s1[start], set))
 		start++;
-	while (end > start && in_set(s1[end - 1], set))
+	while (end > start && is_in_set(s1[end - 1], set))
 		end--;
 	str_size = end - start;
 	return (ft_substr(s1, start, str_size));
