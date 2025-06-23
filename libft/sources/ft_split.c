@@ -6,7 +6,7 @@
 /*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 15:41:53 by dprikhod          #+#    #+#             */
-/*   Updated: 2025/06/23 17:51:56 by dprikhod         ###   ########.fr       */
+/*   Updated: 2025/06/23 18:27:28 by dprikhod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,8 @@ char	**ft_split(char const *s, char c)
 		res[i] = next_word(&s, c);
 		if (!res[i])
 		{
-			while (i)
-			{
-				i--;
+			while (i--)
 				free(res[i]);
-			}
 			free(res);
 			return (NULL);
 		}
