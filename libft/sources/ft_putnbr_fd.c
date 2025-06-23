@@ -1,32 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/06 01:32:41 by niel              #+#    #+#             */
-/*   Updated: 2025/06/23 18:05:55 by dprikhod         ###   ########.fr       */
+/*   Created: 2025/06/23 15:46:28 by dprikhod          #+#    #+#             */
+/*   Updated: 2025/06/23 18:02:08 by dprikhod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memcpy(void *dest, const void *src, size_t n)
+void	ft_putnbr_fd(int n, int fd)
 {
-	unsigned char		*ptr;
-	const unsigned char	*s;
-	size_t				i;
+	char	buf[12];
+	int		i;
+	long	num;
 
-	if (!dest && !src)
-		return (dest);
+	num = n;
 	i = 0;
-	ptr = (unsigned char *)dest;
-	s = (const unsigned char *)src;
-	while (i < n)
+	if (num == 0)
+		buf[i++] = '0';
+	if (num < 0)
 	{
-		ptr[i] = s[i];
-		i++;
+		write(fd, "-", 1);
+		num = -num;
 	}
-	return (dest);
+	while (num > 0)
+	{
+		buf[i++] = (num % 10) + '0';
+		num /= 10;
+	}
+	while (i > 0)
+		write(fd, &buf[--i], 1);
 }

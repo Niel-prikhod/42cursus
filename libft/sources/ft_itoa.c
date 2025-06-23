@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 01:03:36 by marvin            #+#    #+#             */
-/*   Updated: 2025/06/21 01:03:36 by marvin           ###   ########.fr       */
+/*   Updated: 2025/06/23 16:20:22 by dprikhod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@ static size_t	ft_count_len(int nb)
 {
 	size_t	len;
 
-	len = 1;
+	if (nb == 0)
+		return (1);
+	len = 0;
 	while (nb)
 	{
 		nb /= 10;

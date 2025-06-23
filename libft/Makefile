@@ -27,13 +27,14 @@ SOURCES = sources/ft_isalpha.c \
 		  sources/ft_strjoin.c \
 		  sources/ft_strtrim.c \
 		  sources/ft_split.c \
-		#   sources/ft_itoa.c \
-		#   sources/ft_strmapi.c \
-		#   sources/ft_striteri.c \
-		#   sources/ft_putchar_fd.c \
-		#   sources/ft_putstr_fd.c \
-		#   sources/ft_putendl_fd.c \
-		#   sources/ft_putnbr_fd.c
+		  sources/ft_itoa.c \
+		  sources/ft_strmapi.c \
+		  sources/ft_striteri.c \
+		  sources/ft_putchar_fd.c \
+		  sources/ft_putstr_fd.c \
+		  sources/ft_putendl_fd.c \
+		  sources/ft_putnbr_fd.c
+
 # BONUSES = bonuses/ft_lstnew.c \
 		#   sources/ft_lstadd_front.c \
 		#   sources/ft_lstsize.c \
@@ -44,7 +45,6 @@ SOURCES = sources/ft_isalpha.c \
 		#   sources/ft_lstiter.c \
 		#   sources/ft_lstmap.c
 
-
 OBJECTS = $(SOURCES:.c=.o)
 
 HEADERS = libft.h
@@ -53,14 +53,16 @@ CFLAGS = -Wall -Wextra -Werror
 
 CUR_DIR = $(shell pwd)
 
-all: $(NAME) clean
+CC = gcc
+
+all: $(NAME)
 
 $(NAME): $(OBJECTS)
 	ar rc $(NAME) $(OBJECTS)
 	ranlib $(NAME)
 
 %.o: %.c $(HEADERS)
-	cc $(CFLAGS) -I $(CUR_DIR) -c $< -o $@
+	$(CC) $(CFLAGS) -I $(CUR_DIR) -c $< -o $@
 
 clean:
 	rm -f $(OBJECTS)
@@ -69,3 +71,6 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
+so:
+	$(CC) -fPIC $(CFLAGS) $(SOURCES) -I $(CUR_DIR) -c
+	gcc -shared -o libft.so $(OBJECTS)

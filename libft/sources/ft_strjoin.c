@@ -6,7 +6,7 @@
 /*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 15:10:21 by dprikhod          #+#    #+#             */
-/*   Updated: 2025/06/19 15:22:43 by dprikhod         ###   ########.fr       */
+/*   Updated: 2025/06/23 17:26:56 by dprikhod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,19 @@
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	size_t	i;
+	size_t	len1;
+	size_t	len2;
 	char	*res;
 
-	i = ft_strlen(s1) + ft_strlen(s2) + 1;
-	res = malloc(i);
+	if (!s1 || !s2)
+		return (NULL);
+	len1 = ft_strlen(s1);
+	len2 = ft_strlen(s2);
+	res = malloc(len1 + len2 + 1);
 	if (!res)
 		return (NULL);
-	ft_strlcat(res, s1, ft_strlen(s1));
-	ft_strlcat(res, s2, ft_strlen(s2));
+	ft_memcpy(res, s1, len1);
+	ft_memcpy(res + len1, s2, len2);
+	res[len1 + len2] = '\0';
 	return (res);
 }

@@ -6,7 +6,7 @@
 /*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 23:12:29 by niel              #+#    #+#             */
-/*   Updated: 2025/06/19 15:09:51 by dprikhod         ###   ########.fr       */
+/*   Updated: 2025/06/23 16:40:45 by dprikhod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include "libft.h"
+#include <limits.h>
 
 void	test_ft_isalpha()
 {
@@ -89,9 +90,65 @@ void	test_ft_strlcpy()
 
 void	test_ft_strlcat()
 {
-	char dest[20] = "foo";
-	size_t ret = ft_strlcat(dest, "bar", 10);
-	printf("ft_strlcat: %s (expected foobar), return: %zu\n", dest, ret);
+	{
+		char dst[20] = "foo";
+		char dst_ref[20] = "foo";
+		size_t ret = ft_strlcat(dst, "bar", 10);
+		size_t ref = strlcat(dst_ref, "bar", 10);
+		printf("ft_strlcat(\"foo\", \"bar\", 10) = %s (expected %s), ret = %zu (expected %zu)\n", dst, dst_ref, ret, ref);
+	}
+	{
+		char dst[20] = "foo";
+		char dst_ref[20] = "foo";
+		size_t ret = ft_strlcat(dst, "", 10);
+		size_t ref = strlcat(dst_ref, "", 10);
+		printf("ft_strlcat(\"foo\", \"\", 10) = %s (expected %s), ret = %zu (expected %zu)\n", dst, dst_ref, ret, ref);
+	}
+	{
+		char dst[20] = "";
+		char dst_ref[20] = "";
+		size_t ret = ft_strlcat(dst, "bar", 10);
+		size_t ref = strlcat(dst_ref, "bar", 10);
+		printf("ft_strlcat(\"\", \"bar\", 10) = %s (expected %s), ret = %zu (expected %zu)\n", dst, dst_ref, ret, ref);
+	}
+	{
+		char dst[20] = "foo";
+		char dst_ref[20] = "foo";
+		size_t ret = ft_strlcat(dst, "bar", 0);
+		size_t ref = strlcat(dst_ref, "bar", 0);
+		printf("ft_strlcat(\"foo\", \"bar\", 0) = %s (expected %s), ret = %zu (expected %zu)\n", dst, dst_ref, ret, ref);
+	}
+	{
+		char dst[7] = "foobar";
+		char dst_ref[7] = "foobar";
+		size_t ret = ft_strlcat(dst, "baz", 7);
+		size_t ref = strlcat(dst_ref, "baz", 7);
+		printf("ft_strlcat(\"foobar\", \"baz\", 7) = %s (expected %s), ret = %zu (expected %zu)\n", dst, dst_ref, ret, ref);
+	}
+	{
+		char dst[4] = "foo";
+		char dst_ref[4] = "foo";
+		size_t ret = ft_strlcat(dst, "bar", 4);
+		size_t ref = strlcat(dst_ref, "bar", 4);
+		printf("ft_strlcat(\"foo\", \"bar\", 4) = %s (expected %s), ret = %zu (expected %zu)\n", dst, dst_ref, ret, ref);
+	}
+	{
+		char dst[20] = "foo";
+		char dst_ref[20] = "foo";
+		char src[100];
+		memset(src, 'A', 99);
+		src[99] = '\0';
+		size_t ret = ft_strlcat(dst, src, 20);
+		size_t ref = strlcat(dst_ref, src, 20);
+		printf("ft_strlcat(\"foo\", long_src, 20) = %s (expected %s), ret = %zu (expected %zu)\n", dst, dst_ref, ret, ref);
+	}
+	{
+		char dst[7] = "foo";
+		char dst_ref[7] = "foo";
+		size_t ret = ft_strlcat(dst, "bar", 7);
+		size_t ref = strlcat(dst_ref, "bar", 7);
+		printf("ft_strlcat(\"foo\", \"bar\", 7) = %s (expected %s), ret = %zu (expected %zu)\n", dst, dst_ref, ret, ref);
+	}
 }
 
 void	test_ft_toupper()
@@ -234,6 +291,118 @@ void	test_ft_substr()
 	printf("ft_substr(\"%s, %d, %zu\") = %s\n", str, start, ft_strlen(str), sub);
 }
 
+void	test_ft_itoa()
+{
+	char *res;
+
+	res = ft_itoa(0);
+	printf("ft_itoa(0) = \"%s\" (expected \"0\")\n", res);
+	free(res);
+
+	res = ft_itoa(123);
+	printf("ft_itoa(123) = \"%s\" (expected \"123\")\n", res);
+	free(res);
+
+	res = ft_itoa(-456);
+	printf("ft_itoa(-456) = \"%s\" (expected \"-456\")\n", res);
+	free(res);
+
+	res = ft_itoa(1);
+	printf("ft_itoa(1) = \"%s\" (expected \"1\")\n", res);
+	free(res);
+
+	res = ft_itoa(-1);
+	printf("ft_itoa(-1) = \"%s\" (expected \"-1\")\n", res);
+	free(res);
+
+	res = ft_itoa(INT_MAX);
+	printf("ft_itoa(INT_MAX) = \"%s\" (expected \"%d\")\n", res, INT_MAX);
+	free(res);
+
+	res = ft_itoa(INT_MIN);
+	printf("ft_itoa(INT_MIN) = \"%s\" (expected \"%d\")\n", res, INT_MIN);
+	free(res);
+
+	res = ft_itoa(1000000);
+	printf("ft_itoa(1000000) = \"%s\" (expected \"1000000\")\n", res);
+	free(res);
+
+	res = ft_itoa(-999999);
+	printf("ft_itoa(-999999) = \"%s\" (expected \"-999999\")\n", res);
+	free(res);
+}
+
+void test_ft_strjoin_basic() {
+	char *s1 = "Hello, ";
+	char *s2 = "world!";
+	char *result = ft_strjoin(s1, s2);
+	printf("ft_strjoin(\"%s\", \"%s\") = \"%s\" (expected \"Hello, world!\")\n", s1, s2, result);
+	free(result);
+}
+
+// // Test ft_strjoin with empty first string
+// void test_ft_strjoin_empty_first() {
+// 	char *s1 = "";
+// 	char *s2 = "world!";
+// 	char *result = ft_strjoin(s1, s2);
+// 	printf("ft_strjoin(\"%s\", \"%s\") = \"%s\" (expected \"world!\")\n", s1, s2, result);
+// 	free(result);
+// }
+
+// // Test ft_strjoin with empty second string
+// void test_ft_strjoin_empty_second() {
+// 	char *s1 = "Hello, ";
+// 	char *s2 = "";
+// 	char *result = ft_strjoin(s1, s2);
+// 	printf("ft_strjoin(\"%s\", \"%s\") = \"%s\" (expected \"Hello, \")\n", s1, s2, result);
+// 	free(result);
+// }
+
+// // Test ft_strjoin with both strings empty
+// void test_ft_strjoin_both_empty() {
+// 	char *s1 = "";
+// 	char *s2 = "";
+// 	char *result = ft_strjoin(s1, s2);
+// 	printf("ft_strjoin(\"%s\", \"%s\") = \"%s\" (expected \"\")\n", s1, s2, result);
+// 	free(result);
+// }
+
+// // Test ft_strjoin with NULL first string
+// void test_ft_strjoin_null_first() {
+// 	char *s1 = NULL;
+// 	char *s2 = "world!";
+// 	char *result = ft_strjoin(s1, s2);
+// 	printf("ft_strjoin(NULL, \"%s\") = %s (expected NULL)\n", s2, result ? result : "NULL");
+// 	free(result);
+// }
+
+// // Test ft_strjoin with NULL second string
+// void test_ft_strjoin_null_second() {
+// 	char *s1 = "Hello, ";
+// 	char *s2 = NULL;
+// 	char *result = ft_strjoin(s1, s2);
+// 	printf("ft_strjoin(\"%s\", NULL) = %s (expected NULL)\n", s1, result ? result : "NULL");
+// 	free(result);
+// }
+
+// // Test ft_strjoin with both NULL
+// void test_ft_strjoin_both_null() {
+// 	char *result = ft_strjoin(NULL, NULL);
+// 	printf("ft_strjoin(NULL, NULL) = %s (expected NULL)\n", result ? result : "NULL");
+// 	free(result);
+// }
+
+// // Test ft_strjoin with long strings
+// void test_ft_strjoin_long() {
+// 	char s1[1024];
+// 	char s2[1024];
+// 	memset(s1, 'A', 1023); s1[1023] = '\0';
+// 	memset(s2, 'B', 1023); s2[1023] = '\0';
+// 	char *result = ft_strjoin(s1, s2);
+// 	printf("ft_strjoin(long A, long B) length = %zu (expected 2046)\n", result ? strlen(result) : 0);
+// 	free(result);
+// }
+
 int main(void)
 {
 	// test_ft_isalpha();
@@ -247,7 +416,7 @@ int main(void)
 	// test_ft_memcpy();
 	// test_ft_memmove();
 	// test_ft_strlcpy();
-	// test_ft_strlcat();
+	test_ft_strlcat();
 	// test_ft_toupper();
 	// test_ft_tolower();
 	// test_ft_strchr();
@@ -260,5 +429,16 @@ int main(void)
 	// test_ft_calloc();
 	// test_ft_strdup();
 	// test_ft_substr();
+	// test_ft_itoa();
+
+	// test_ft_strjoin_basic();
+	// test_ft_strjoin_empty_first();
+	// test_ft_strjoin_empty_second();
+	// test_ft_strjoin_both_empty();
+	// test_ft_strjoin_null_first();
+	// test_ft_strjoin_null_second();
+	// test_ft_strjoin_both_null();
+	// test_ft_strjoin_long();
+
 	return (0);
 }

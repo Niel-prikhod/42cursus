@@ -6,7 +6,7 @@
 /*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 15:41:53 by dprikhod          #+#    #+#             */
-/*   Updated: 2025/06/19 17:01:40 by dprikhod         ###   ########.fr       */
+/*   Updated: 2025/06/23 17:51:56 by dprikhod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,28 +15,38 @@
 static int	count_words(char const *s, char c)
 {
 	int	count;
+	int	in_word;
 
-	count = 1;
+	count = 0;
+	in_word = 0;
 	while (*s)
 	{
-		if (*s == c)
+		if (*s != c && in_word == 0)
+		{
+			in_word = 1;
 			count++;
+		}
+		else if (*s == c)
+		{
+			in_word = 0;
+		}
+		s++;
 	}
 	return (count);
 }
 
 static char	*next_word(char const **s, char c)
 {
-	char	*start;
-	size_t	len;
+	const char	*start;
+	size_t		len;
 
 	while (**s && **s == c)
 		(*s)++;
-	start = (char *)*s;
+	start = *s;
 	len = 0;
-	while (*s[len] && (*s)[len] != c)
+	while ((*s)[len] && (*s)[len] != c)
 		len++;
-	*s += len;
+	*s = *s + len;
 	return (ft_substr(start, 0, len));
 }
 
@@ -46,11 +56,13 @@ char	**ft_split(char const *s, char c)
 	int		words;
 	char	**res;
 
-	i = 0;
+	if (!s)
+		return (NULL);
 	words = count_words(s, c);
-	res = (char **)ft_calloc(words + 1, sizeof(char *));
+	res = (char **)malloc(sizeof(char *) * (words + 1));
 	if (!res)
 		return (NULL);
+	i = 0;
 	while (i < words)
 	{
 		res[i] = next_word(&s, c);
@@ -58,13 +70,14 @@ char	**ft_split(char const *s, char c)
 		{
 			while (i)
 			{
-				free(res[i]);
 				i--;
+				free(res[i]);
 			}
 			free(res);
 			return (NULL);
 		}
 		i++;
 	}
+	res[i] = NULL;
 	return (res);
 }
