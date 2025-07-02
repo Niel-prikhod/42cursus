@@ -1,5 +1,4 @@
-.out
-*test*
 *.o
 *.a
 *.so
+*.out

@@ -3,16 +3,17 @@ NAME = libftprintf.a
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
-SOURCES = ft_printf.c
+SOURCES = ft_printf.c utils.c
 
 OBJECTS = $(SOURCES:.c=.o)
 
-HEADERS = libftprintf.h
+HEADERS = ft_printf.h \
+		  libft/libft.h
 
 CUR_DIR = $(shell pwd)
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -I $(LIBFT_DIR)
+CFLAGS = -Wall -Wextra -Werror -I $(LIBFT_DIR) -I .
 
 all: $(LIBFT) $(NAME)
 $(LIBFT):
