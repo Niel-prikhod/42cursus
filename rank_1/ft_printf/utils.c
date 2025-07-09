@@ -6,7 +6,7 @@
 /*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 15:51:58 by dprikhod          #+#    #+#             */
-/*   Updated: 2025/07/02 19:40:21 by dprikhod         ###   ########.fr       */
+/*   Updated: 2025/07/03 19:45:41 by dprikhod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	i_handle(int n)
 
 int	x_handle(unsigned long x, char *base)
 {
-	char	hex[13];
+	char	hex[15];
 	int		i;
 	int		temp;
 

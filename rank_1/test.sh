@@ -1,5 +1,5 @@
 cd ft_printf
 make re
 cd ..
-cc test_ft_printf.c ft_printf/libftprintf.a ft_printf/libft/libft.a -O
+cc test_ft_printf.c ft_printf/libftprintf.a -O
 ./a.out
