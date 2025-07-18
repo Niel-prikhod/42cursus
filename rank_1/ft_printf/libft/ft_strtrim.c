@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
+/*   By: niel <niel@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 15:23:10 by dprikhod          #+#    #+#             */
-/*   Updated: 2025/06/19 17:25:33 by dprikhod         ###   ########.fr       */
+/*   Updated: 2025/07/18 01:03:17 by niel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-// #TODO too many arguments in function
 
 static int	is_in_set(char c, const char *set)
 {

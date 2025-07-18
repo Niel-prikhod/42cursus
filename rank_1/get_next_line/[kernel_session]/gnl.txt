@@ -1,1 +1,5 @@
 text to practice read function
+another text test
+short
+line
+Now here is a bigger line 
