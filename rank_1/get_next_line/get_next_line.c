@@ -3,55 +3,83 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niel <niel@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 12:50:13 by dprikhod          #+#    #+#             */
-/*   Updated: 2025/07/18 01:33:13 by niel             ###   ########.fr       */
+/*   Updated: 2025/07/18 17:37:21 by dprikhod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*extraction(char	**stash)
+static char	*fetch_line(int fd, char *stash, char *buf)
 {
-	char	*line;
-	char	*new_stash;
-	char	*newline_pos;
-	size_t	len;
+	ssize_t	check;
+	
+	check = 1;
+	while (check > 0)
+	{
+		check = read(fd, buf, BUFFER_SIZE);
+		if (check < 0)
+		{
+			free(stash);
+			return (NULL);
+		}
+		buf[check] = '\0';
+		if (!stash)
+			stash = "";
+		stash = ft_strjoin(stash, buf);
+		if (ft_strchr(buf, '\n'))
+			break ;
+	}
+	return (stash);
+}
 
-	if (!*stash || !**stash)
+static char	*_set_line(char *line)
+{
+	char	*stash;
+	ssize_t	i;
+
+	i = 0;
+	while (line[i] != '\n' && line[i] != '\0')
+		i++;
+	if (line[i] == 0 || line[1] == 0)
 		return (NULL);
-	newline_pos = ft_strchr(*stash, '\n');
-	if (newline_pos)
-		len = newline_pos - *stash + 1;
-	else
-		len = ft_strlen(*stash);
-	line = ft_substr(*stash, 0, len); // allocate line to return
-	new_stash = ft_strdup(*stash + len); // allocate leftover
-	free(*stash); // free old stash
-	*stash = (*new_stash && newline_pos) ? new_stash : NULL;
-	if (!*stash)
-		free(new_stash);
-	return (line);
+	if (line_buffer[i] == 0 || line_buffer[1] == 0)
+        return (NULL);
+    stash = ft_substr(line, i + 1, ft_strlen(line) - i);
+    if (*stash == 0)
+    {
+        free(stash);
+        stash = NULL;
+    }   
+    line[i + 1] = 0;
+    return (stash);
 }
 
 char	*get_next_line(int fd)
 {
 	static char	*stash;
-	char		buf[BUFFER_SIZE];
+	char		*line;
+	char		*buf;
 	int			i;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (NULL);
-	while (!ft_strchr(stash, '\n'))
+	buf = malloc(BUFFER_SIZE + 1);
+	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
 	{
-		i = read(fd, buf, BUFFER_SIZE);
-		if (i < 0)
-			return (NULL);
-		if (i == 0)
-			break ;
-		buf[i] = '\0';
-		stash = ft_strjoin(stash, buf);
+		free(stash);
+		free(buf);
+		stash = NULL;
+		buf = NULL;
+		return (NULL);
 	}
-	return (extraction(&stash));
+	if (!buf)
+		return (NULL);
+	line = fetch_line(fd, stash, buf);
+	free(buf);
+	buf = NULL;
+	if (!line)
+		return (NULL);
+	stash = _set_line(line);
+	return (line);
 }
