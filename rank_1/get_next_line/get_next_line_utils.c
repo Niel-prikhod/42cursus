@@ -6,7 +6,7 @@
 /*   By: niel <niel@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 12:50:55 by dprikhod          #+#    #+#             */
-/*   Updated: 2025/07/18 01:40:07 by niel             ###   ########.fr       */
+/*   Updated: 2025/07/19 18:29:20 by niel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,38 +23,6 @@ size_t	ft_strlen(const char *str)
 		str++;
 	}
 	return (n);
-}
-
-size_t	ft_strlcpy(char *dest, const char *src, size_t size)
-{
-	size_t	i;
-
-	i = 0;
-	if (size > 0)
-	{
-		while (i < size - 1 && src[i] != '\0')
-		{
-			dest[i] = src[i];
-			i++;
-		}
-		dest[i] = '\0';
-	}
-	while (src[i])
-		i++;
-	return (i);
-}
-
-char	*ft_strdup(const char *s)
-{
-	char	*ptr;
-	size_t	size;
-
-	size = ft_strlen(s) + 1;
-	ptr = malloc(size);
-	if (!ptr)
-		return (NULL);
-	ft_strlcpy(ptr, s, size);
-	return (ptr);
 }
 
 void	*ft_memcpy(void *dest, const void *src, size_t n)
@@ -74,6 +42,38 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 		i++;
 	}
 	return (dest);
+}
+
+// size_t	ft_strlcpy(char *dest, const char *src, size_t size)
+// {
+// 	size_t	i;
+
+// 	i = 0;
+// 	if (size > 0)
+// 	{
+// 		while (i < size - 1 && src[i] != '\0')
+// 		{
+// 			dest[i] = src[i];
+// 			i++;
+// 		}
+// 		dest[i] = '\0';
+// 	}
+// 	while (src[i])
+// 		i++;
+// 	return (i);
+// }
+
+char	*ft_strdup(const char *s)
+{
+	char	*ptr;
+	size_t	size;
+
+	size = ft_strlen(s) + 1;
+	ptr = malloc(size);
+	if (!ptr)
+		return (NULL);
+	ft_memcpy(ptr, s, size);
+	return (ptr);
 }
 
 char	*ft_strjoin(char const *s1, char const *s2)
@@ -113,17 +113,4 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	ft_memcpy(sub, s + start, len);
 	sub[len] = '\0';
 	return (sub);
-}
-
-char	*ft_strchr(const char *s, int c)
-{
-	while (*s)
-	{
-		if (*s == (unsigned char)c)
-			return ((char *)s);
-		s++;
-	}
-	if ((unsigned char)c == '\0')
-		return ((char *)s);
-	return (NULL);
 }

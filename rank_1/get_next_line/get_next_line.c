@@ -3,19 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
+/*   By: niel <niel@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 12:50:13 by dprikhod          #+#    #+#             */
-/*   Updated: 2025/07/19 18:00:45 by dprikhod         ###   ########.fr       */
+/*   Updated: 2025/07/19 18:29:38 by niel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
+char	*ft_strchr(const char *s, int c)
+{
+	while (*s)
+	{
+		if (*s == (unsigned char)c)
+			return ((char *)s);
+		s++;
+	}
+	if ((unsigned char)c == '\0')
+		return ((char *)s);
+	return (NULL);
+}
+
 static char	*fetch_line(int fd, char *stash, char *buf)
 {
 	ssize_t	check;
-	
+
 	check = 1;
 	while (check > 0)
 	{
