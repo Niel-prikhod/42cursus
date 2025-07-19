@@ -6,7 +6,7 @@
 /*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 23:24:23 by niel              #+#    #+#             */
-/*   Updated: 2025/07/18 14:35:37 by dprikhod         ###   ########.fr       */
+/*   Updated: 2025/07/19 16:30:39 by dprikhod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 int main(void)
 {
-    char    *file = "[kernel_session]/gnl.txt"; 
+    char    *file = "[kernel_session]/gnl_empty.txt"; 
     int fd = open(file, O_RDONLY);
     char    *str = NULL;
     while ((str = get_next_line(fd)) != NULL)
