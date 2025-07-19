@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niel <niel@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 12:50:13 by dprikhod          #+#    #+#             */
-/*   Updated: 2025/07/19 18:29:38 by niel             ###   ########.fr       */
+/*   Updated: 2025/07/19 19:10:39 by dprikhod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,22 +28,24 @@ char	*ft_strchr(const char *s, int c)
 static char	*fetch_line(int fd, char *stash, char *buf)
 {
 	ssize_t	check;
+	char	*tmp;
 
 	check = 1;
 	while (check > 0)
 	{
 		check = read(fd, buf, BUFFER_SIZE);
 		if (check < 0)
-		{
-			free(stash);
-			return (NULL);
-		}
+			return (free(stash), NULL);
 		else if (check == 0)
 			break ;
 		buf[check] = '\0';
 		if (!stash)
-			stash = "";
-		stash = ft_strjoin(stash, buf);
+			tmp = ft_strdup("");
+		else
+			tmp = stash;
+		stash = ft_strjoin(tmp, buf);
+		if (stash != tmp)
+			free(tmp);
 		if (ft_strchr(buf, '\n'))
 			break ;
 	}
