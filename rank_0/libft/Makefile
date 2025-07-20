@@ -37,6 +37,8 @@ SOURCES = ft_isalpha.c \
 
 OBJECTS = $(SOURCES:.c=.o)
 
+BONUS = ft_bonus.c
+
 HEADERS = libft.h
 
 CFLAGS = -Wall -Wextra -Werror
@@ -54,6 +56,8 @@ $(NAME): $(OBJECTS)
 %.o: %.c $(HEADERS)
 	$(CC) $(CFLAGS) -I $(CUR_DIR) -c $< -o $@
 
+bonus: $(NAME) $(BONUS:.c=.o)
+	ar rc $(NAME) $(BONUS:.c=.o)
 clean:
 	rm -f $(OBJECTS)
 

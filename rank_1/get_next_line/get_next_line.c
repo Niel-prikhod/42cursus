@@ -6,7 +6,7 @@
 /*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 12:50:13 by dprikhod          #+#    #+#             */
-/*   Updated: 2025/07/19 19:10:39 by dprikhod         ###   ########.fr       */
+/*   Updated: 2025/07/20 14:12:18 by dprikhod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ char	*get_next_line(int fd)
 	char		*buf;
 
 	buf = malloc(BUFFER_SIZE + 1);
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
+	if (fd < 0 || BUFFER_SIZE <= 0)
 	{
 		free(stash);
 		free(buf);

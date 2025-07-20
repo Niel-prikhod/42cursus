@@ -6,11 +6,11 @@
 /*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 12:56:25 by dprikhod          #+#    #+#             */
-/*   Updated: 2025/07/20 11:43:14 by dprikhod         ###   ########.fr       */
+/*   Updated: 2025/07/02 19:52:09 by dprikhod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
 static int	ft_var_handle(const char *format, va_list args, int i)
 {

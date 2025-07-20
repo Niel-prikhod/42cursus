@@ -1,6 +1,6 @@
 NAME = libft.a
 
-SOURCES = ft_is_group.c \
+SOURCES = ft_isgroup.c \
 	ft_malloc_group.c \
 	ft_mem_group.c \
 	ft_put_group.c \
@@ -10,8 +10,7 @@ SOURCES = ft_is_group.c \
 	ft_str_finder.c \
 	ft_str_utils.c \
 	ft_printf.c \
-	ft_printf_utils.c
-# 	get_next_line.c
+	get_next_line.c
 
 OBJECTS = $(SOURCES:.c=.o)
 
