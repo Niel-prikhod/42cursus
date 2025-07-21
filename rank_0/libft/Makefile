@@ -38,6 +38,7 @@ SOURCES = ft_isalpha.c \
 OBJECTS = $(SOURCES:.c=.o)
 
 BONUS = ft_bonus.c
+BONUS_OBJECTS = $(BONUS:.c=.o)
 
 HEADERS = libft.h
 
@@ -56,10 +57,11 @@ $(NAME): $(OBJECTS)
 %.o: %.c $(HEADERS)
 	$(CC) $(CFLAGS) -I $(CUR_DIR) -c $< -o $@
 
-bonus: $(NAME) $(BONUS:.c=.o)
-	ar rc $(NAME) $(BONUS:.c=.o)
+bonus: $(NAME) $(BONUS_OBJECTS)
+	ar rc $(NAME) $(BONUS_OBJECTS)
+
 clean:
-	rm -f $(OBJECTS)
+	rm -f $(OBJECTS) $(BONUS_OBJECTS)
 
 fclean: clean
 	rm -f $(NAME)

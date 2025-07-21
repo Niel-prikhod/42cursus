@@ -6,7 +6,7 @@
 /*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 11:52:33 by dprikhod          #+#    #+#             */
-/*   Updated: 2025/07/20 13:35:56 by dprikhod         ###   ########.fr       */
+/*   Updated: 2025/07/21 16:56:37 by dprikhod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,23 +70,53 @@ t_list	*ft_lstlast(t_list *lst)
 	if (!lst)
 		return (NULL);
 	while (lst->next)
-	{
 		lst = lst->next;
-	}
 	return (lst);
 }
 
 /*
 # Description:
-Returns the last node of the list.
+Adds the node ’new’ at the end of the list.
 
 # Parameters:
-lst: the beggining of the list.
+lst: The address of a pointer to the first node of
+a list.
+new: The address of a pointer to the node to be
+added.
 
 # Return value:
-Last node of the list.
+None
 */
-void ft_lstadd_back(t_list **lst, t_list *new)
+void	ft_lstadd_back(t_list **lst, t_list *new)
+{
+	t_list	*last;
+
+	if (!lst || !new)
+		return ;
+	if (*lst == NULL)
+		*lst = new;
+	else
+	{
+		last = ft_lstlast(*lst);
+		last->next = new;
+	}
+}
+
+/*
+### Description:
+Takes a node as parameter and frees its content
+using the function ’del’. Free the node itself but
+does NOT free the next node.
+
+### Parameters:
+lst: The node to free.
+del: The address of the function used to delete
+the content.
+
+### Return value:
+None
+*/
+void	ft_lstdelone(t_list *lst, void (*del)(void*))
 {
 	
 }
