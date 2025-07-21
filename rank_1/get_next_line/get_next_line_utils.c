@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niel <niel@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 12:50:55 by dprikhod          #+#    #+#             */
-/*   Updated: 2025/07/19 18:29:20 by niel             ###   ########.fr       */
+/*   Updated: 2025/07/21 15:58:03 by dprikhod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ size_t	ft_strlen(const char *str)
 void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
 	unsigned char		*ptr;
-	const unsigned char	*s;
+	unsigned const char	*s;
 	size_t				i;
 
 	if (!dest && !src)
@@ -36,6 +36,11 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 	i = 0;
 	ptr = (unsigned char *)dest;
 	s = (const unsigned char *)src;
+	while (i < n / 8 * 8)
+	{
+		*((size_t *)(ptr + i)) = *((const size_t *)(s + i));
+		i += 8;
+	}
 	while (i < n)
 	{
 		ptr[i] = s[i];
@@ -43,25 +48,6 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 	}
 	return (dest);
 }
-
-// size_t	ft_strlcpy(char *dest, const char *src, size_t size)
-// {
-// 	size_t	i;
-
-// 	i = 0;
-// 	if (size > 0)
-// 	{
-// 		while (i < size - 1 && src[i] != '\0')
-// 		{
-// 			dest[i] = src[i];
-// 			i++;
-// 		}
-// 		dest[i] = '\0';
-// 	}
-// 	while (src[i])
-// 		i++;
-// 	return (i);
-// }
 
 char	*ft_strdup(const char *s)
 {
