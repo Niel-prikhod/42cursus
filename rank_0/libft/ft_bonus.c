@@ -6,7 +6,7 @@
 /*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 11:52:33 by dprikhod          #+#    #+#             */
-/*   Updated: 2025/07/21 16:56:37 by dprikhod         ###   ########.fr       */
+/*   Updated: 2025/07/28 16:40:13 by dprikhod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ the content.
 ### Return value:
 None
 */
-void	ft_lstdelone(t_list *lst, void (*del)(void*))
-{
+// void	ft_lstdelone(t_list *lst, void (*del)(void*))
+// {
 	
-}
+// }

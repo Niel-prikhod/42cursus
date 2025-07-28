@@ -1,16 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*   malloc_group.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
+/*   By: niel <niel@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/21 01:03:36 by marvin            #+#    #+#             */
-/*   Updated: 2025/06/23 16:20:22 by dprikhod         ###   ########.fr       */
+/*   Created: 2025/06/06 01:29:13 by niel              #+#    #+#             */
+/*   Updated: 2025/07/20 10:36:37 by niel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+void	*ft_bzero(void *s, int n)
+{
+	ft_memset(s, 0, n);
+	return (s);
+}
+
+void	*ft_calloc(size_t count, size_t size)
+{
+	void	*ptr;
+
+	if (count == 0 || size == 0)
+		return (malloc(0));
+	ptr = malloc(count * size);
+	if (!ptr)
+		return (NULL);
+	ft_bzero(ptr, count * size);
+	return (ptr);
+}
+
+char	*ft_strdup(const char *s)
+{
+	char	*ptr;
+	size_t	size;	
+
+	size = ft_strlen(s) + 1;
+	ptr = malloc(size);
+	if (!ptr)
+		return (NULL);
+	ft_strlcpy(ptr, s, size);
+	return (ptr);
+}
 
 static size_t	ft_count_len(int nb)
 {

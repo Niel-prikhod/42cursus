@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
+/*   By: niel <niel@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 15:23:10 by dprikhod          #+#    #+#             */
-/*   Updated: 2025/06/19 17:25:33 by dprikhod         ###   ########.fr       */
+/*   Updated: 2025/07/20 10:56:29 by niel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-// #TODO too many arguments in function
 
 static int	is_in_set(char c, const char *set)
 {
@@ -38,4 +37,43 @@ char	*ft_strtrim(char const *s1, char const *set)
 		end--;
 	str_size = end - start;
 	return (ft_substr(s1, start, str_size));
+}
+
+int	ft_atoi(const char *str)
+{
+	int		sign;
+	long	result;
+
+	sign = 1;
+	result = 0;
+	while (*str == ' ' || (*str >= 9 && *str <= 13))
+		str++;
+	if (*str == '-' || *str == '+')
+	{
+		if (*str == '-')
+			sign = -1;
+		str++;
+	}
+	while (*str >= '0' && *str <= '9')
+	{
+		result = result * 10 + (*str - '0');
+		str++;
+	}
+	return (sign * result);
+}
+
+int	ft_tolower(int c)
+{
+	if (c >= 65 && c <= 90)
+		return (c + 32);
+	else
+		return (c);
+}
+
+int	ft_toupper(int c)
+{
+	if (c >= 97 && c <= 122)
+		return (c - 32);
+	else
+		return (c);
 }
