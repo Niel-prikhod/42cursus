@@ -15,7 +15,7 @@ SOURCES = ft_is_group.c \
 
 OBJECTS = $(SOURCES:.c=.o)
 
-BONUS = ft_bonus.c
+BONUS = ft_bonus.c ft_bonus_2.c
 BONUS_OBJECTS = $(BONUS:.c=.o)
 
 HEADERS = libft.h
