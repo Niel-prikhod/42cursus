@@ -43,7 +43,79 @@ node’s content.
 ## Return value
 None
 */
-void ft_lstiter(t_list *lst, void (*f)(void *))
+void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
+	if (!lst)
+		return ;
+	while (lst)
+	{
+		f(lst->content);
+		lst = lst->next;
+	}
 }
 
+/*
+Deletes and frees the given node and all its
+successors, using the function ’del’ and free(3).
+Finally, set the pointer to the list to NULL.
+## Parameters
+lst: The address of a pointer to a node.
+del: The address of the function used to delete
+the content of the node.
+## Return value
+None
+*/
+void	ft_lstclear(t_list **lst, void (*del)(void*))
+{
+	t_list	*tmp;
+
+	if (!lst || !*lst)
+		return ;
+	while (*lst)
+	{
+		tmp = (*lst)->next;
+		ft_lstdelone(*lst, *del);
+		*lst = tmp;
+	}
+	lst = NULL;
+}
+
+/*
+Iterates through the list ’lst’, applies the
+function ’f’ to each node’s content, and creates
+a new list resulting of the successive applications
+of the function ’f’. The ’del’ function is used to
+delete the content of a node if needed.
+## Parameters
+lst: The address of a pointer to a node.
+f: The address of the function applied to each
+node’s content.
+del: The address of the function used to delete a
+node’s content if needed.
+## Return value
+The new list.
+NULL if the allocation fails.
+*/
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
+{
+	t_list	*new;
+	t_list	*last;
+
+	if (!lst)
+		return (NULL);
+	new = (t_list *)malloc(sizeof(t_list));
+	if (!new)
+		return (NULL);
+	new->content = f(lst->content);
+	last = new;
+	lst = lst->next;
+	while (lst)
+	{
+		last->next = ft_lstnew(f(lst->content));
+		if (!last)
+			return (ft_lstclear(&new, del), NULL);
+		lst = lst->next;
+		last = last->next;
+	}
+	return (new);
+}
