@@ -1,6 +1,6 @@
 NAME = libft.a
 
-SOURCES = ft_isgroup.c \
+SOURCES = ft_is_group.c \
 	ft_malloc_group.c \
 	ft_mem_group.c \
 	ft_put_group.c \
@@ -10,9 +10,15 @@ SOURCES = ft_isgroup.c \
 	ft_str_finder.c \
 	ft_str_utils.c \
 	ft_printf.c \
-	get_next_line.c
+	ft_printf_utils.c \
+	ft_bonus.c \
+	ft_bonus_2.c
+# 	get_next_line.c
 
 OBJECTS = $(SOURCES:.c=.o)
+
+BONUS = ft_bonus.c ft_bonus_2.c
+BONUS_OBJECTS = $(BONUS:.c=.o)
 
 HEADERS = libft.h
 
@@ -28,11 +34,14 @@ $(NAME): $(OBJECTS)
 	ar rc $(NAME) $(OBJECTS)
 	ranlib $(NAME)
 
+bonus: $(NAME) $(BONUS_OBJECTS)
+	ar rc $(NAME) $(BONUS_OBJECTS)
+
 %.o: %.c $(HEADERS)
 	$(CC) $(CFLAGS) -I $(CUR_DIR) -c $< -o $@
 
 clean:
-	rm -f $(OBJECTS)
+	rm -f $(OBJECTS) $(BONUS_OBJECTS)
 
 fclean: clean
 	rm -f $(NAME)
