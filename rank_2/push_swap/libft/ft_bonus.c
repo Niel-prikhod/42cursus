@@ -6,7 +6,7 @@
 /*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 11:52:33 by dprikhod          #+#    #+#             */
-/*   Updated: 2025/07/28 17:02:56 by dprikhod         ###   ########.fr       */
+/*   Updated: 2025/08/16 16:44:25 by dprikhod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,20 +56,40 @@ void	ft_lstadd_front(t_list **lst, t_list *new)
 }
 
 /*
-# Description:
-Returns the last node of the list.
+# description:
+returns the last node of the list.
 
-# Parameters:
+# parameters:
 lst: the beggining of the list.
 
-# Return value:
-Last node of the list.
+# return value:
+last node of the list.
 */
 t_list	*ft_lstlast(t_list *lst)
 {
 	if (!lst)
 		return (NULL);
 	while (lst->next)
+		lst = lst->next;
+	return (lst);
+}
+
+/*
+# description:
+returns the prelast node of the list.
+
+# parameters:
+lst: the beggining of the list.
+
+# return value:
+prelast node of the list.
+*/
+t_list	*ft_lstprelast(t_list *lst)
+{
+
+	if (!lst)
+		return (NULL);
+	while (lst->next->next)
 		lst = lst->next;
 	return (lst);
 }
@@ -102,25 +122,3 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 	}
 }
 
-/*
-### Description:
-Takes a node as parameter and frees its content
-using the function ’del’. Free the node itself but
-does NOT free the next node.
-
-### Parameters:
-lst: The node to free.
-del: The address of the function used to delete
-the content.
-
-### Return value:
-None
-*/
-void	ft_lstdelone(t_list *lst, void (*del)(void*))
-{
-	if (!lst)
-		return ;
-	del(lst->content);
-	free(lst);
-	return ;
-}

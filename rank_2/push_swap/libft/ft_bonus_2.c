@@ -6,7 +6,7 @@
 /*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 16:57:35 by dprikhod          #+#    #+#             */
-/*   Updated: 2025/08/15 00:33:01 by dprikhod         ###   ########.fr       */
+/*   Updated: 2025/08/16 16:42:20 by dprikhod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,29 @@ void	ft_lstiter(t_list *lst, void (*f)(void *))
 		f(lst->content);
 		lst = lst->next;
 	}
+}
+
+/*
+### Description:
+Takes a node as parameter and frees its content
+using the function ’del’. Free the node itself but
+does NOT free the next node.
+
+### Parameters:
+lst: The node to free.
+del: The address of the function used to delete
+the content.
+
+### Return value:
+None
+*/
+void	ft_lstdelone(t_list *lst, void (*del)(void*))
+{
+	if (!lst)
+		return ;
+	del(lst->content);
+	free(lst);
+	return ;
 }
 
 /*

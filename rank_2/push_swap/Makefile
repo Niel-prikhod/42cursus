@@ -4,7 +4,7 @@ CFLAGS = -Wextra -Wall -Werror -O3 -g3 -I. -I$(LIBFT)
 
 NAME = push_swap
 
-SOURCES = push_swap.c pb_utils.c
+SOURCES = push_swap.c ps_utils.c ps_motions.c
 
 BUILD = build
 OBJECTS = $(addprefix $(BUILD)/, $(SOURCES:.c=.o))
