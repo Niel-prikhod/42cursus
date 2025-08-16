@@ -28,22 +28,22 @@ CUR_DIR = $(shell pwd)
 
 CC = cc
 
-all: $(NAME)
+all: $(NAME) bonus
 
 $(NAME): $(OBJECTS)
-	ar rc $(NAME) $(OBJECTS)
-	ranlib $(NAME)
+	@ar rc $(NAME) $(OBJECTS)
+	@ranlib $(NAME)
 
 bonus: $(NAME) $(BONUS_OBJECTS)
-	ar rc $(NAME) $(BONUS_OBJECTS)
+	@ar rc $(NAME) $(BONUS_OBJECTS)
 
 %.o: %.c $(HEADERS)
-	$(CC) $(CFLAGS) -I $(CUR_DIR) -c $< -o $@
+	@$(CC) $(CFLAGS) -I $(CUR_DIR) -c $< -o $@
 
 clean:
-	rm -f $(OBJECTS) $(BONUS_OBJECTS)
+	@rm -f $(OBJECTS) $(BONUS_OBJECTS)
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
 
 re: fclean all

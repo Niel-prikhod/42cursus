@@ -6,7 +6,7 @@
 /*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 22:13:53 by dprikhod          #+#    #+#             */
-/*   Updated: 2025/08/15 00:44:29 by dprikhod         ###   ########.fr       */
+/*   Updated: 2025/08/15 14:55:46 by dprikhod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,12 @@ void	print_list(t_list *list)
 {
 	if (!list)
 		return ;
-	while (list->next)
+	while (list)
 	{
-		ft_printf("%d\n", *(int*)list->content);
+		ft_printf("	%c\n", *(int*)list->content);
 		list = list->next;
 	}
+	write(1, "\n",1);
 }
 
 void free_str_ptr(void *str)
