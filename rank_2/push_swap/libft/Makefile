@@ -22,7 +22,7 @@ BONUS_OBJECTS = $(BONUS:.c=.o)
 
 HEADERS = libft.h
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -fPIC
 
 CUR_DIR = $(shell pwd)
 

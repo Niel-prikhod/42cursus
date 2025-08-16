@@ -6,7 +6,7 @@
 /*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 22:13:53 by dprikhod          #+#    #+#             */
-/*   Updated: 2025/08/15 14:55:46 by dprikhod         ###   ########.fr       */
+/*   Updated: 2025/08/16 15:24:27 by dprikhod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ void	print_list(t_list *list)
 		ft_printf("	%c\n", *(int*)list->content);
 		list = list->next;
 	}
-	write(1, "\n",1);
+	ft_printf("\n");
 }
 
-void free_str_ptr(void *str)
+void do_nothing(void *content)
 {
-	free(*((void **)str));
+    (void)content; // Suppress unused parameter warning
 }
