@@ -4,7 +4,8 @@ CFLAGS = -Wextra -Wall -Werror -O3 -g3 -I. -I$(LIBFT)
 
 NAME = push_swap
 
-SOURCES = push_swap.c ps_utils.c ps_motions.c
+SOURCES = push_swap.c ps_utils.c ps_motions.c input_parser.c \
+		  stack_utils.c
 
 BUILD = build
 OBJECTS = $(addprefix $(BUILD)/, $(SOURCES:.c=.o))
@@ -19,7 +20,7 @@ $(BUILD)/%.o: %.c $(HEADERS) | $(BUILD)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME): $(OBJECTS) $(LIBFT)/libft.a
-	@$(CC) $(OBJECTS) $(LIBFT)/libft.a -o $(NAME) $(LDFLAGS)
+	@$(CC) $(OBJECTS) $(LIBFT)/libft.a -o $(NAME)
 
 $(LIBFT)/libft.a:
 	@make -C $(LIBFT)
