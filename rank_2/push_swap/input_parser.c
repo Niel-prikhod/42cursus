@@ -6,15 +6,20 @@
 /*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 10:44:32 by dprikhod          #+#    #+#             */
-/*   Updated: 2025/08/19 15:53:35 by dprikhod         ###   ########.fr       */
+/*   Updated: 2025/08/21 00:54:50 by dprikhod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft/libft.h"
 #include "push_swap.h"
+#include <stdint.h>
 
-// check if string is correctly formatted and contains only digits and max one 
-// sign, is within integer limits
-int	ft_atoi_plus(char	*num)
+/*
+	Check if string is correctly formatted and contains only digits and max one
+	sign, is within integer limits use t_parse to send status,
+	change value by reference
+*/
+t_parse	parse_int(char *num, int *value)
 {
 	long	result;
 	int		sign;
@@ -30,68 +35,63 @@ int	ft_atoi_plus(char	*num)
 	}
 	else if (num[i] == '+')
 		i++;
-	while (num[i] && ft_isdigit(num[i]))
+	while (num[i])
 	{
+		if (!ft_isdigit(num[i]))
+			return (PARSE_FAILED);
 		result = result * 10 + (num[i] - '0');
 		if (result > INT_MAX || (sign == -1 && result > (long)INT_MAX + 1))
-			return (0);
+			return (PARSE_FAILED);
 		i++;
 	}
-	return (sign * result);
-}
-
-void	free_split(char **arr)
-{
-	int	i;
-
-	i = 0;
-	while (arr[i])
-	{
-		free(arr[i]);
-		i++;
-	}
-	free(arr);
+	*value = sign * result;
+	return (PARSE_SUCCESS);
 }
 
 // spliting the string and processing each part.
 // Similar to ft_lstmap but with array from ft_split
-t_stack	*parse_string(char	*str)
+t_stack	*parse_string(char *str)
 {
-	char	**arr;
-	int		i;
-	t_stack	*stack;
-	t_stack	*last;
+	char		**arr;
+	int			i;
+	t_stack		*stack;
+	t_stack		*last;
+	t_hash_node	**table;
 
+	stack = NULL;
+	table = ft_hash_init();
 	arr = ft_split(str, ' ');
-	stack = malloc(sizeof(t_list));
-	stack->value = ft_atoi_plus(arr[0]);
-	i = 1;
-	last = stack;
+	if (!arr || !table)
+		return (free_split(arr), ft_hash_clear(table), NULL);
+	i = 0;
 	while (arr[i])
 	{
-		last->next = ft_stack_new(ft_atoi_plus(arr[i]));
-		last = last->next;
-		if (!last->value)
-		{
-			return (free_split(arr), ft_stack_clear(&stack), NULL);
-		}
+		last = malloc(sizeof(t_stack));
+		if (!last || parse_int(arr[i], &last->value) == PARSE_FAILED
+			|| ft_hash_insert(table, last->value) == 1)
+			return (free(last), free_split(arr), ft_stack_clear(&stack),
+				ft_hash_clear(table), NULL);
+		ft_stack_add_back(&stack, last);
 		i++;
 	}
-	free_split(arr);
-	return (stack);
+	return (free_split(arr), ft_hash_clear(table), stack);
 }
 
 // choosing correct argv
-t_stack	*parser(int argc, char	**argv)
+t_stack	*parser(int argc, char **argv)
 {
 	t_stack	*stack;
-	//int		i;
-	
-	if (argc != 2)
+	t_stack	*last;
+	int		i;
+
+	i = 0;
+	stack = NULL;
+	while (++i < argc)
 	{
-		ft_printf("WORK IN PROGRES!!!");
-		exit(1);
+		last = parse_string(argv[i]);
+		if (!last)
+			return (ft_stack_clear(&stack), NULL);
+		ft_stack_add_back(&stack, last);
 	}
-	stack = parse_string(argv[1]);
 	return (stack);
 }

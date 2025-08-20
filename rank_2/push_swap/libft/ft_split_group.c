@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split.c                                         :+:      :+:    :+:   */
+/*   ft_split_group.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: niel <niel@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 15:41:53 by dprikhod          #+#    #+#             */
-/*   Updated: 2025/07/20 10:41:09 by niel             ###   ########.fr       */
+/*   Updated: 2025/08/20 15:27:09 by dprikhod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,4 +97,20 @@ char	**ft_split(char const *s, char c)
 	}
 	res[i] = NULL;
 	return (res);
+}
+
+/*
+## Free array after split
+*/
+void	free_split(char **arr)
+{
+	int	i;
+
+	i = 0;
+	while (arr[i])
+	{
+		free(arr[i]);
+		i++;
+	}
+	free(arr);
 }

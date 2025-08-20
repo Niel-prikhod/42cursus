@@ -6,7 +6,7 @@
 /*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 11:52:33 by dprikhod          #+#    #+#             */
-/*   Updated: 2025/08/16 16:44:25 by dprikhod         ###   ########.fr       */
+/*   Updated: 2025/08/19 16:49:08 by dprikhod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,26 +75,6 @@ t_list	*ft_lstlast(t_list *lst)
 }
 
 /*
-# description:
-returns the prelast node of the list.
-
-# parameters:
-lst: the beggining of the list.
-
-# return value:
-prelast node of the list.
-*/
-t_list	*ft_lstprelast(t_list *lst)
-{
-
-	if (!lst)
-		return (NULL);
-	while (lst->next->next)
-		lst = lst->next;
-	return (lst);
-}
-
-/*
 # Description:
 Adds the node ’new’ at the end of the list.
 
@@ -121,4 +101,3 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 		last->next = new;
 	}
 }
-

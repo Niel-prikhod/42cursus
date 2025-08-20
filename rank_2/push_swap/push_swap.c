@@ -6,21 +6,22 @@
 /*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 20:28:23 by dprikhod          #+#    #+#             */
-/*   Updated: 2025/08/19 15:27:19 by dprikhod         ###   ########.fr       */
+/*   Updated: 2025/08/21 00:32:20 by dprikhod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int main(int argc, char *argv[]) 
+int	main(int argc, char *argv[])
 {
 	t_stack	*a;
-	//	t_stack	*b;
-	//	char	**part;
 
+	//	t_stack	*b;
 	if (argc < 2)
 		return (ft_printf("Error\n"), 1);
 	a = parser(argc, argv);
+	if (!a)
+		return (ft_printf("Error\n"), 1);
 	ft_printf("stack a:\n");
 	print_stack(a);
 	/*
@@ -45,7 +46,6 @@ reverse_rotate(&b);
 ft_printf("rrb\n");
 ft_printf("stack b:\n");
 print_list(b);
-
 ft_lstclear(&a, do_nothing);
 ft_lstclear(&b, do_nothing);
 */

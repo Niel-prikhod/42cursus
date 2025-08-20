@@ -6,7 +6,7 @@
 /*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 16:24:55 by dprikhod          #+#    #+#             */
-/*   Updated: 2025/08/19 15:27:46 by dprikhod         ###   ########.fr       */
+/*   Updated: 2025/08/19 16:49:12 by dprikhod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ void	swap(t_stack **list)
 void	rotate(t_stack **list)
 {
 	t_stack	*tmp;
-	
-	tmp = (*list)->next;	//store the 2nd node
+
+	tmp = (*list)->next;
 	(*list)->next = NULL;
 	ft_stack_add_back(&tmp, *list);
 	*list = tmp;
@@ -56,21 +56,21 @@ void	reverse_rotate(t_stack **list)
 }
 */
 
-void reverse_rotate(t_stack **list)
+void	reverse_rotate(t_stack **list)
 {
-    t_stack *last;
-    t_stack *prelast;
+	t_stack	*last;
+	t_stack	*prelast;
 
-    if (!list || !*list || !(*list)->next)
-        return ;
-    prelast = *list;
-    last = prelast->next;
-    while (last->next)
-    {
-        prelast = prelast->next;
-        last = last->next;
-    }
-    prelast->next = NULL;
-    last->next = *list;
-    *list = last;
+	if (!list || !*list || !(*list)->next)
+		return ;
+	prelast = *list;
+	last = prelast->next;
+	while (last->next)
+	{
+		prelast = prelast->next;
+		last = last->next;
+	}
+	prelast->next = NULL;
+	last->next = *list;
+	*list = last;
 }

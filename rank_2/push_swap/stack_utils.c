@@ -6,47 +6,47 @@
 /*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 15:06:57 by dprikhod          #+#    #+#             */
-/*   Updated: 2025/08/19 16:03:41 by dprikhod         ###   ########.fr       */
+/*   Updated: 2025/08/19 18:13:22 by dprikhod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 // Add new node to the back of t_stack list
-void ft_stack_add_back(t_stack **lst, t_stack *new)
+void	ft_stack_add_back(t_stack **lst, t_stack *new)
 {
-    t_stack *current;
+	t_stack	*current;
 
-    if (!lst || !new)
-        return ;
-    if (!*lst)
-    {
-        *lst = new;
-        return ;
-    }
-    current = *lst;
-    while (current->next)
-        current = current->next;
-    current->next = new;
+	if (!lst || !new)
+		return ;
+	if (!*lst)
+	{
+		*lst = new;
+		return ;
+	}
+	current = *lst;
+	while (current->next)
+		current = current->next;
+	current->next = new;
 }
 
 // Create a new t_stack node
-t_stack *ft_stack_new(int value)
+t_stack	*ft_stack_new(int value)
 {
-    t_stack *new_node;
+	t_stack	*new_node;
 
-    new_node = malloc(sizeof(t_stack));
-    if (!new_node)
-        return (NULL);
-    new_node->value = value;
-    new_node->next = NULL;
-    return (new_node);
+	new_node = malloc(sizeof(t_stack));
+	if (!new_node)
+		return (NULL);
+	new_node->value = value;
+	new_node->next = NULL;
+	return (new_node);
 }
 
 void	ft_stack_clear(t_stack **stack)
 {
-	t_stack *current;
-	t_stack *next;
+	t_stack	*current;
+	t_stack	*next;
 
 	if (!stack || !*stack)
 		return ;
