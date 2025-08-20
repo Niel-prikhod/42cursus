@@ -6,7 +6,7 @@
 /*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 10:44:32 by dprikhod          #+#    #+#             */
-/*   Updated: 2025/08/21 00:54:50 by dprikhod         ###   ########.fr       */
+/*   Updated: 2025/08/21 01:02:57 by dprikhod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,48 +50,49 @@ t_parse	parse_int(char *num, int *value)
 
 // spliting the string and processing each part.
 // Similar to ft_lstmap but with array from ft_split
-t_stack	*parse_string(char *str)
+t_stack	*parse_string(char *str, t_hash_node **table)
 {
-	char		**arr;
-	int			i;
-	t_stack		*stack;
-	t_stack		*last;
-	t_hash_node	**table;
+	char	**arr;
+	int		i;
+	t_stack	*stack;
+	t_stack	*last;
 
 	stack = NULL;
-	table = ft_hash_init();
 	arr = ft_split(str, ' ');
-	if (!arr || !table)
-		return (free_split(arr), ft_hash_clear(table), NULL);
+	if (!arr)
+		return (free_split(arr), NULL);
 	i = 0;
 	while (arr[i])
 	{
 		last = malloc(sizeof(t_stack));
 		if (!last || parse_int(arr[i], &last->value) == PARSE_FAILED
 			|| ft_hash_insert(table, last->value) == 1)
-			return (free(last), free_split(arr), ft_stack_clear(&stack),
-				ft_hash_clear(table), NULL);
+			return (free(last), free_split(arr), ft_stack_clear(&stack), NULL);
 		ft_stack_add_back(&stack, last);
 		i++;
 	}
-	return (free_split(arr), ft_hash_clear(table), stack);
+	return (free_split(arr), stack);
 }
 
 // choosing correct argv
 t_stack	*parser(int argc, char **argv)
 {
-	t_stack	*stack;
-	t_stack	*last;
-	int		i;
+	t_stack		*stack;
+	t_stack		*last;
+	t_hash_node	**table;
+	int			i;
 
+	table = ft_hash_init();
+	if (!table)
+		return (ft_hash_clear(table), NULL);
 	i = 0;
 	stack = NULL;
 	while (++i < argc)
 	{
-		last = parse_string(argv[i]);
+		last = parse_string(argv[i], table);
 		if (!last)
-			return (ft_stack_clear(&stack), NULL);
+			return (ft_stack_clear(&stack), ft_hash_clear(table), NULL);
 		ft_stack_add_back(&stack, last);
 	}
-	return (stack);
+	return (ft_hash_clear(table), stack);
 }
