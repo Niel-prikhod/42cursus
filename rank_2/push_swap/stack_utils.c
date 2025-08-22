@@ -6,7 +6,7 @@
 /*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 15:06:57 by dprikhod          #+#    #+#             */
-/*   Updated: 2025/08/19 18:13:22 by dprikhod         ###   ########.fr       */
+/*   Updated: 2025/08/22 16:38:10 by dprikhod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,17 @@ void	ft_stack_clear(t_stack **stack)
 		current = next;
 	}
 	*stack = NULL;
+}
+
+int	ft_stack_size(t_stack *stack)
+{
+	int	size;
+
+	size = 0;
+	while (stack)
+	{
+		size++;
+		stack = stack->next;
+	}
+	return (size);
 }

@@ -6,7 +6,7 @@
 /*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 16:24:55 by dprikhod          #+#    #+#             */
-/*   Updated: 2025/08/19 16:49:12 by dprikhod         ###   ########.fr       */
+/*   Updated: 2025/08/22 17:19:16 by dprikhod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,4 +73,55 @@ void	reverse_rotate(t_stack **list)
 	prelast->next = NULL;
 	last->next = *list;
 	*list = last;
+}
+
+/*
+temporary operations
+*/
+void	sa(t_stack **a)
+{
+	swap(a);
+	ft_printf("sa\n");
+}
+
+void	sb(t_stack **b)
+{
+	swap(b);
+	ft_printf("sb\n");
+}
+
+void	rb(t_stack **b)
+{
+	rotate(b);
+	ft_printf("rb\n");
+}
+
+void	ra(t_stack **a)
+{
+	rotate(a);
+	ft_printf("sa\n");
+}
+
+void	rra(t_stack **a)
+{
+	reverse_rotate(a);
+	ft_printf("sa\n");
+}
+
+void	rrb(t_stack **b)
+{
+	reverse_rotate(b);
+	ft_printf("sa\n");
+}
+
+void	pb(t_stack **a, t_stack **b)
+{
+	push(a, b);
+	ft_printf("pb\n");
+}
+
+void	pa(t_stack **b, t_stack **a)
+{
+	push(b, a);
+	ft_printf("pa\n");
 }

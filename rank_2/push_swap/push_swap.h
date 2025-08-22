@@ -6,7 +6,7 @@
 /*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 20:29:12 by dprikhod          #+#    #+#             */
-/*   Updated: 2025/08/21 00:42:07 by dprikhod         ###   ########.fr       */
+/*   Updated: 2025/08/22 17:04:39 by dprikhod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,16 @@ int						ft_hash_insert(t_hash_node **table, int to_check);
 int						ft_hash(int value);
 t_hash_node				**ft_hash_init(void);
 void					ft_hash_clear(t_hash_node **table);
+int						ft_stack_size(t_stack *stack);
+int						ft_is_sorted(t_stack *stack);
+
+void	sa(t_stack **a);
+void	sb(t_stack **b);
+void	rb(t_stack **b);
+void	ra(t_stack **a);
+void	rra(t_stack **a);
+void	rrb(t_stack **b);
+void	pb(t_stack **a, t_stack **b);
+void	pa(t_stack **b, t_stack **a);
 
 #endif

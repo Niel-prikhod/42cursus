@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/14 20:28:23 by dprikhod          #+#    #+#             */
-/*   Updated: 2025/08/21 00:32:20 by dprikhod         ###   ########.fr       */
+/*   Created: 2025/08/22 17:10:31 by dprikhod          #+#    #+#             */
+/*   Updated: 2025/08/22 17:10:43 by dprikhod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ print_list(b);
 ft_lstclear(&a, do_nothing);
 ft_lstclear(&b, do_nothing);
 */
+	ft_printf("is_sorted: %d\n", ft_is_sorted(a));
 	ft_stack_clear(&a);
 	return (0);
 }
