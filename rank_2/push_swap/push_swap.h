@@ -6,7 +6,7 @@
 /*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 20:29:12 by dprikhod          #+#    #+#             */
-/*   Updated: 2025/09/17 22:09:25 by dprikhod         ###   ########.fr       */
+/*   Updated: 2025/09/20 18:38:30 by dprikhod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ t_hash_node				**ft_hash_init(void);
 void					ft_hash_clear(t_hash_node **table);
 int						ft_stack_size(t_stack *stack);
 int						ft_is_sorted(t_stack *stack);
-void					ft_sort_small(t_stack **a, t_stack **b);
+void					ft_sort_small(t_stack **a, t_stack **b, int size);
 void					ft_radix_sort(t_stack **a, t_stack **b, int size);
 
 void					sa(t_stack **a);
@@ -60,6 +60,6 @@ void					ra(t_stack **a);
 void					rra(t_stack **a);
 void					rrb(t_stack **b);
 void					pb(t_stack **a, t_stack **b);
-void					pa(t_stack **b, t_stack **a);
+void					pa(t_stack **a, t_stack **b);
 
 #endif

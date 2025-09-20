@@ -6,7 +6,7 @@
 /*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 16:24:55 by dprikhod          #+#    #+#             */
-/*   Updated: 2025/08/22 17:19:16 by dprikhod         ###   ########.fr       */
+/*   Updated: 2025/09/20 18:37:37 by dprikhod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ void	pb(t_stack **a, t_stack **b)
 	ft_printf("pb\n");
 }
 
-void	pa(t_stack **b, t_stack **a)
+void	pa(t_stack **a, t_stack **b)
 {
 	push(b, a);
 	ft_printf("pa\n");

@@ -6,7 +6,7 @@
 /*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 16:26:04 by dprikhod          #+#    #+#             */
-/*   Updated: 2025/09/17 22:36:20 by dprikhod         ###   ########.fr       */
+/*   Updated: 2025/09/20 18:47:05 by dprikhod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,37 @@ static void	ft_sort_3(t_stack **a)
 	}
 }
 
-void	ft_sort_small(t_stack **a, t_stack **b)
+static void	find_smallest(t_stack **a, t_stack **b, int size)
 {
-	int	size;
+	int		i;
+	int		smallest;
+	t_stack	*tmp;
 
-	size = ft_stack_size(*a);
+	tmp = *a;
+	i = 0;
+	smallest = (*a)->value;
+	while (tmp != NULL)
+	{
+		if (tmp->value < smallest)
+			smallest = tmp->value;
+		tmp = tmp->next;
+		i++;
+	}
+	if ((size / 2) > i)
+	{
+		while (i--)
+			ra(a);
+	}
+	else
+	{
+		while (i++ < size)
+			rra(a);
+	}
+	pb(a, b);
+}
+
+void	ft_sort_small(t_stack **a, t_stack **b, int size)
+{
 	if (size <= 1 || ft_is_sorted(*a))
 		return ;
 	if (size == 2)
@@ -47,6 +73,7 @@ void	ft_sort_small(t_stack **a, t_stack **b)
 		ft_sort_3(a);
 	else
 	{
+		/*
 		while (!ft_is_sorted(*a))
 		{
 			if ((*a)->value > (*a)->next->value)
@@ -60,6 +87,12 @@ void	ft_sort_small(t_stack **a, t_stack **b)
 					sa(a);
 			}
 		}
+		*/
+		while (size-- > 3)
+			find_smallest(a, b, size);
+		ft_sort_3(a);
+		while (*b)
+			pa(a, b);
 	}
 }
 
@@ -71,7 +104,7 @@ void	ft_radix_sort(t_stack **a, t_stack **b, int size)
 	int	j;
 	int	bit_size;
 
-	if (!a || !b || !*a || !*b || size < 6)
+	if (!a || !b || !*a || size < 6)
 		return ;
 	bit_size = 0;
 	while ((size - 1) >> bit_size)
