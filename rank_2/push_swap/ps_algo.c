@@ -6,7 +6,7 @@
 /*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 16:26:04 by dprikhod          #+#    #+#             */
-/*   Updated: 2025/09/20 18:47:05 by dprikhod         ###   ########.fr       */
+/*   Updated: 2025/09/25 21:30:06 by dprikhod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,13 +96,38 @@ void	ft_sort_small(t_stack **a, t_stack **b, int size)
 	}
 }
 
-// static int	sort_bit(t_stack **a, t_stack **b, int size)
+static int	ft_isbit_one(t_stack *a, int bit)
+{
+	int	ones;
+
+	ones = 0;
+	while (a)
+	{
+		if ((a->value >> bit) & 1)
+			ones++;
+		a = a->next;
+	}
+	return (ones);
+}
+
+static int	sort_bit(t_stack **a, t_stack **b, int bit, int ones)
+{
+	if ((((*a)->value >> (bit - 1)) & 1) == 0)
+		pb(a, b);
+	else
+	{
+		ra(a);
+		ones--;
+	}
+	return (ones);
+}
 
 void	ft_radix_sort(t_stack **a, t_stack **b, int size)
 {
 	int	i;
 	int	j;
 	int	bit_size;
+	int	ones;
 
 	if (!a || !b || !*a || size < 6)
 		return ;
@@ -113,13 +138,9 @@ void	ft_radix_sort(t_stack **a, t_stack **b, int size)
 	while (i++ < (bit_size + 1))
 	{
 		j = 0;
-		while (j++ < (size))
-		{
-			if ((((*a)->value >> (i - 1)) & 1) == 0)
-				pb(a, b);
-			else
-				ra(a);
-		}
+		ones = ft_isbit_one(*a, i);
+		while (j++ < (size) && ones)
+			ones = sort_bit(a, b, i, ones);
 		while (*b)
 			pa(a, b);
 	}
