@@ -6,7 +6,7 @@
 /*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 16:26:04 by dprikhod          #+#    #+#             */
-/*   Updated: 2025/09/25 21:30:06 by dprikhod         ###   ########.fr       */
+/*   Updated: 2025/09/25 21:48:51 by dprikhod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ static int	ft_isbit_one(t_stack *a, int bit)
 
 static int	sort_bit(t_stack **a, t_stack **b, int bit, int ones)
 {
-	if ((((*a)->value >> (bit - 1)) & 1) == 0)
+	if ((((*a)->value >> bit) & 1) == 0)
 		pb(a, b);
 	else
 	{
@@ -135,7 +135,7 @@ void	ft_radix_sort(t_stack **a, t_stack **b, int size)
 	while ((size - 1) >> bit_size)
 		bit_size++;
 	i = 0;
-	while (i++ < (bit_size + 1))
+	while (i < (bit_size + 1))
 	{
 		j = 0;
 		ones = ft_isbit_one(*a, i);
@@ -143,5 +143,6 @@ void	ft_radix_sort(t_stack **a, t_stack **b, int size)
 			ones = sort_bit(a, b, i, ones);
 		while (*b)
 			pa(a, b);
+		i++;
 	}
 }

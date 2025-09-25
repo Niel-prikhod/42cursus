@@ -6,7 +6,7 @@
 /*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 16:24:55 by dprikhod          #+#    #+#             */
-/*   Updated: 2025/09/20 18:37:37 by dprikhod         ###   ########.fr       */
+/*   Updated: 2025/09/25 22:06:54 by dprikhod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,19 +99,19 @@ void	rb(t_stack **b)
 void	ra(t_stack **a)
 {
 	rotate(a);
-	ft_printf("sa\n");
+	ft_printf("ra\n");
 }
 
 void	rra(t_stack **a)
 {
 	reverse_rotate(a);
-	ft_printf("sa\n");
+	ft_printf("rra\n");
 }
 
 void	rrb(t_stack **b)
 {
 	reverse_rotate(b);
-	ft_printf("sa\n");
+	ft_printf("rrb\n");
 }
 
 void	pb(t_stack **a, t_stack **b)
