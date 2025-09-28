@@ -6,7 +6,7 @@
 /*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 16:26:04 by dprikhod          #+#    #+#             */
-/*   Updated: 2025/09/25 21:48:51 by dprikhod         ###   ########.fr       */
+/*   Updated: 2025/09/28 14:23:02 by dprikhod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,27 +37,33 @@ static void	ft_sort_3(t_stack **a)
 static void	find_smallest(t_stack **a, t_stack **b, int size)
 {
 	int		i;
+	int		smallest_pos;
 	int		smallest;
 	t_stack	*tmp;
 
 	tmp = *a;
 	i = 0;
 	smallest = (*a)->value;
+	smallest_pos = 0;
 	while (tmp != NULL)
 	{
 		if (tmp->value < smallest)
+		{
 			smallest = tmp->value;
+			smallest_pos = i;
+		}
 		tmp = tmp->next;
 		i++;
 	}
-	if ((size / 2) > i)
+	i = 0;
+	if (smallest_pos <= (size - smallest_pos))
 	{
-		while (i--)
+		while (i++ < smallest_pos)
 			ra(a);
 	}
 	else
 	{
-		while (i++ < size)
+		while (i++ <= (size - smallest_pos))
 			rra(a);
 	}
 	pb(a, b);
