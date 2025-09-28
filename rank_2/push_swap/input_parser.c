@@ -6,7 +6,7 @@
 /*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 10:44:32 by dprikhod          #+#    #+#             */
-/*   Updated: 2025/08/21 01:02:57 by dprikhod         ###   ########.fr       */
+/*   Updated: 2025/09/28 19:24:16 by dprikhod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ t_stack	*parse_string(char *str, t_hash_node **table)
 	while (arr[i])
 	{
 		last = malloc(sizeof(t_stack));
+		last->next = NULL;
 		if (!last || parse_int(arr[i], &last->value) == PARSE_FAILED
 			|| ft_hash_insert(table, last->value) == 1)
 			return (free(last), free_split(arr), ft_stack_clear(&stack), NULL);
