@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_hash.c                                          :+:      :+:    :+:   */
+/*   ps_hash.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 18:43:43 by dprikhod          #+#    #+#             */
-/*   Updated: 2025/08/21 00:54:30 by dprikhod         ###   ########.fr       */
+/*   Updated: 2025/09/29 12:24:10 by dprikhod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	ft_hash(int value)
+static int	ft_hash(int value)
 {
 	if (value < 0)
 		return ((-value) % HASH_SIZE);

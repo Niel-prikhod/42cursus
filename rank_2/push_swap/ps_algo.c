@@ -6,31 +6,20 @@
 /*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 16:26:04 by dprikhod          #+#    #+#             */
-/*   Updated: 2025/09/28 14:23:02 by dprikhod         ###   ########.fr       */
+/*   Updated: 2025/09/29 12:41:43 by dprikhod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-int	ft_is_sorted(t_stack *stack)
-{
-	while (stack->next)
-	{
-		if (!(stack->value < stack->next->value))
-			return (0);
-		stack = stack->next;
-	}
-	return (1);
-}
 
 static void	ft_sort_3(t_stack **a)
 {
 	while (!ft_is_sorted(*a))
 	{
 		if ((*a)->value > (*a)->next->value)
-			sa(a);
+			swap(a, 'a');
 		else
-			rra(a);
+			reverse_rotate(a, 'a');
 	}
 }
 
@@ -59,14 +48,14 @@ static void	find_smallest(t_stack **a, t_stack **b, int size)
 	if (smallest_pos <= (size - smallest_pos))
 	{
 		while (i++ < smallest_pos)
-			ra(a);
+			rotate(a, 'a');
 	}
 	else
 	{
 		while (i++ <= (size - smallest_pos))
-			rra(a);
+			reverse_rotate(a, 'a');
 	}
-	pb(a, b);
+	push(a, b, 'b');
 }
 
 void	ft_sort_small(t_stack **a, t_stack **b, int size)
@@ -74,31 +63,16 @@ void	ft_sort_small(t_stack **a, t_stack **b, int size)
 	if (size <= 1 || ft_is_sorted(*a))
 		return ;
 	if (size == 2)
-		sa(a);
+		swap(a, 'a');
 	else if (size == 3)
 		ft_sort_3(a);
 	else
 	{
-		/*
-		while (!ft_is_sorted(*a))
-		{
-			if ((*a)->value > (*a)->next->value)
-				sa(a);
-			else if (ft_stack_size(*b) < 2)
-				pb(a, b);
-			else
-			{
-				pa(a, b);
-				if ((*a)->value > (*a)->next->value)
-					sa(a);
-			}
-		}
-		*/
 		while (size-- > 3)
 			find_smallest(a, b, size);
 		ft_sort_3(a);
 		while (*b)
-			pa(a, b);
+			push(b, a, 'a');
 	}
 }
 
@@ -119,10 +93,10 @@ static int	ft_isbit_one(t_stack *a, int bit)
 static int	sort_bit(t_stack **a, t_stack **b, int bit, int ones)
 {
 	if ((((*a)->value >> bit) & 1) == 0)
-		pb(a, b);
+		push(a, b, 'b');
 	else
 	{
-		ra(a);
+		rotate(a, 'a');
 		ones--;
 	}
 	return (ones);
@@ -148,7 +122,7 @@ void	ft_radix_sort(t_stack **a, t_stack **b, int size)
 		while (j++ < (size) && ones)
 			ones = sort_bit(a, b, i, ones);
 		while (*b)
-			pa(a, b);
+			push(b, a, 'a');
 		i++;
 	}
 }
