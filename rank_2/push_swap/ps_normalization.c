@@ -6,7 +6,7 @@
 /*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 17:05:33 by dprikhod          #+#    #+#             */
-/*   Updated: 2025/09/28 19:06:24 by dprikhod         ###   ########.fr       */
+/*   Updated: 2025/10/05 19:50:39 by dprikhod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,13 +91,9 @@ void	normalize(t_stack **a, int size)
 	while (tmp)
 	{
 		tmp->value = get_index(arr, size, tmp->value);
-		if (i == -1) // Should not happen with valid input
-		{
-			free(arr);
-			return ; // Or handle error
-		}
+		if (i == -1)
+			return (free(arr));
 		tmp = tmp->next;
 	}
 	free(arr);
-	arr = NULL;
 }
