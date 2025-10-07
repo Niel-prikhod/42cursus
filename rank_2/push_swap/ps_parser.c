@@ -6,7 +6,7 @@
 /*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 10:44:32 by dprikhod          #+#    #+#             */
-/*   Updated: 2025/09/28 19:24:16 by dprikhod         ###   ########.fr       */
+/*   Updated: 2025/10/07 17:50:32 by dprikhod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,18 +29,16 @@ t_parse	parse_int(char *num, int *value)
 	i = 0;
 	sign = 1;
 	if (num[i] == '-')
-	{
 		sign = -1;
-		i++;
-	}
-	else if (num[i] == '+')
+	if (num[i] == '-' || num[i] == '+')
 		i++;
 	while (num[i])
 	{
 		if (!ft_isdigit(num[i]))
 			return (PARSE_FAILED);
 		result = result * 10 + (num[i] - '0');
-		if (result > INT_MAX || (sign == -1 && result > (long)INT_MAX + 1))
+		if ((sign == 1 && result > 2147483647) || (sign == -1
+				&& result > (long)INT_MAX + 1))
 			return (PARSE_FAILED);
 		i++;
 	}

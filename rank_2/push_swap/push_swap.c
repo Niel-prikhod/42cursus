@@ -6,7 +6,7 @@
 /*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 17:10:31 by dprikhod          #+#    #+#             */
-/*   Updated: 2025/09/28 18:48:00 by dprikhod         ###   ########.fr       */
+/*   Updated: 2025/10/07 17:54:16 by dprikhod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	sort_main(t_stack **a)
 
 	b = NULL;
 	size = ft_stack_size(*a);
-	if (size < 2)
+	if (size < 2 || ft_is_sorted(*a))
 		return ;
 	else if (size <= 5)
 		ft_sort_small(a, &b, size);
@@ -35,10 +35,10 @@ int	main(int argc, char *argv[])
 	int		size;
 
 	if (argc < 2)
-		return (ft_printf("Error\n"), 1);
+		return (1);
 	a = parser(argc, argv);
 	if (!a)
-		return (ft_printf("Error\n"), 1);
+		return (print_err(), 1);
 	size = ft_stack_size(a);
 	normalize(&a, size);
 	sort_main(&a);

@@ -1,4 +1,4 @@
-CC = gcc
+CC = cc
 LIBFT = ./libft
 CFLAGS = -Wextra -Wall -Werror -O3 -g3 -I. -I$(LIBFT)
 

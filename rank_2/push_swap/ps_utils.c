@@ -6,7 +6,7 @@
 /*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 22:13:53 by dprikhod          #+#    #+#             */
-/*   Updated: 2025/08/19 15:36:54 by dprikhod         ###   ########.fr       */
+/*   Updated: 2025/10/07 17:51:06 by dprikhod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,9 @@ void	print_stack(t_stack *list)
 		list = list->next;
 	}
 	ft_printf("\n");
+}
+
+void	print_err(void)
+{
+	ft_putstr_fd("Error\n", 2);
 }

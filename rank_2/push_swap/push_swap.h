@@ -6,7 +6,7 @@
 /*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 20:29:12 by dprikhod          #+#    #+#             */
-/*   Updated: 2025/09/29 12:33:11 by dprikhod         ###   ########.fr       */
+/*   Updated: 2025/10/07 17:55:19 by dprikhod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,9 @@ void					ft_radix_sort(t_stack **a, t_stack **b, int size);
 
 // ps_normalization.c
 void					normalize(t_stack **a, int size);
+
+// ps_utils.c
+void					print_err(void);
 
 /*
 void					sa(t_stack **a);
