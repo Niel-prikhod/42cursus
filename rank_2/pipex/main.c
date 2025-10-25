@@ -6,7 +6,7 @@
 /*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 06:00:34 by dprikhod          #+#    #+#             */
-/*   Updated: 2025/10/25 18:39:57 by dprikhod         ###   ########.fr       */
+/*   Updated: 2025/10/25 19:14:35 by dprikhod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,18 +37,6 @@ void	ft_pipclr(t_pipex **data)
 	close((*data)->infile);
 	close((*data)->outfile);
 	free(*data);
-}
-
-void	ft_print_split(char **arr)
-{
-	while (arr)
-	{
-		if (*arr)
-			ft_printf("%s\n", *arr);
-		else
-			return ;
-		arr++;
-	}
 }
 
 void	ft_print_cmd(t_list *cmd)

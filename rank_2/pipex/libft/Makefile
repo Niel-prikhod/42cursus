@@ -5,6 +5,7 @@ SOURCES = ft_is_group.c \
 	ft_mem_group.c \
 	ft_put_group.c \
 	ft_split_group.c \
+	ft_split2.c \
 	ft_str_adv.c \
 	ft_str_basic.c \
 	ft_str_finder.c \

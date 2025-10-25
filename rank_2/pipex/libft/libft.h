@@ -6,7 +6,7 @@
 /*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 14:34:56 by dprikhod          #+#    #+#             */
-/*   Updated: 2025/10/25 18:39:26 by dprikhod         ###   ########.fr       */
+/*   Updated: 2025/10/25 19:13:13 by dprikhod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,14 @@ char				*ft_strdup(const char *s);
 char				*ft_substr(char const *s, unsigned int start, size_t len);
 char				*ft_strjoin(char const *s1, char const *s2);
 char				*ft_strtrim(char const *s1, char const *set);
+
+// ft_split_group.c
 char				**ft_split(char const *s, char c);
 void				ft_clr_split(void *content);
+
+// ft_split2.c
+void				ft_print_split(char **arr);
+
 char				*ft_itoa(int n);
 char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void				ft_striteri(char *s, void (*f)(unsigned int, char *));
