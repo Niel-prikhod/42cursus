@@ -6,7 +6,7 @@
 /*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 06:00:34 by dprikhod          #+#    #+#             */
-/*   Updated: 2025/10/25 19:14:35 by dprikhod         ###   ########.fr       */
+/*   Updated: 2025/10/25 19:34:41 by dprikhod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,11 @@ int	main(int argc, char **argv, char **env)
 		return (INVALID_ARGS);
 	data = malloc(sizeof(t_pipex));
 	data->infile = open(argv[0], O_RDONLY);
+	if (data->infile < 0)
+		return (perror("INFILE ERROR"), EXIT_FAILURE);
 	data->outfile = open(argv[argc - 1], O_TRUNC | O_WRONLY | O_CREAT);
-	if (!data->infile || !data->outfile)
-		return (INVALID_FILE);
-	//  data->cmd = malloc(sizeof(
+	if (data->outfile < 0)
+		return (perror("OUTFILE ERROR"), EXIT_FAILURE);
 	parse_cmd(argc, argv, data);
 	ft_print_cmd(data->cmd);
 	ft_pipclr(&data);
