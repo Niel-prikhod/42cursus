@@ -6,7 +6,7 @@
 /*   By: niel <niel@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 15:41:53 by dprikhod          #+#    #+#             */
-/*   Updated: 2025/08/20 15:27:09 by dprikhod         ###   ########.fr       */
+/*   Updated: 2025/10/25 18:39:48 by dprikhod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,10 +102,12 @@ char	**ft_split(char const *s, char c)
 /*
 ## Free array after split
 */
-void	free_split(char **arr)
+void	ft_clr_split(void *content)
 {
-	int	i;
+	char	**arr;
+	int		i;
 
+	arr = (char **)content;
 	i = 0;
 	while (arr[i])
 	{
