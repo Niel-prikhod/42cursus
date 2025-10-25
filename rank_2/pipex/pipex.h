@@ -6,7 +6,7 @@
 /*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 06:01:59 by dprikhod          #+#    #+#             */
-/*   Updated: 2025/10/25 16:18:40 by dprikhod         ###   ########.fr       */
+/*   Updated: 2025/10/25 20:16:18 by dprikhod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PIPEX_H
 
 # include "libft/libft.h"
+# include <curses.h>
 # include <fcntl.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -31,6 +32,7 @@ typedef struct s_pipex
 	t_list	*cmd;
 	int		infile;
 	int		outfile;
+	char	*path;
 }			t_pipex;
 
 #endif

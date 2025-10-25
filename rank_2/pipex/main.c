@@ -6,7 +6,7 @@
 /*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 06:00:34 by dprikhod          #+#    #+#             */
-/*   Updated: 2025/10/25 19:34:41 by dprikhod         ###   ########.fr       */
+/*   Updated: 2025/10/25 20:18:22 by dprikhod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	parse_cmd(int argc, char **argv, t_pipex *data)
 		fts->content = ft_split(argv[i], ' ');
 		fts->next = NULL;
 		ft_lstadd_back(&(data->cmd), fts);
-		ft_printf("%d\n", i);
 		i++;
 	}
 }
@@ -51,6 +50,20 @@ void	ft_print_cmd(t_list *cmd)
 	}
 }
 
+bool	parse_path(char **env, t_pipex *data)
+{
+	while (env)
+	{
+		if (ft_strnstr(*env, "PATH", 4) == *env)
+		{
+			data->path = *env + 5;
+			return (true);
+		}
+		env++;
+	}
+	return (false);
+}
+
 int	main(int argc, char **argv, char **env)
 {
 	t_pipex	*data;
@@ -61,12 +74,13 @@ int	main(int argc, char **argv, char **env)
 	data->infile = open(argv[0], O_RDONLY);
 	if (data->infile < 0)
 		return (perror("INFILE ERROR"), EXIT_FAILURE);
-	data->outfile = open(argv[argc - 1], O_TRUNC | O_WRONLY | O_CREAT);
-	if (data->outfile < 0)
-		return (perror("OUTFILE ERROR"), EXIT_FAILURE);
+	// data->outfile = open(argv[argc - 1], O_TRUNC | O_WRONLY | O_CREAT);
+	// if (data->outfile < 0)
+	//	return (perror("OUTFILE ERROR"), EXIT_FAILURE);
 	parse_cmd(argc, argv, data);
-	ft_print_cmd(data->cmd);
+	if (!parse_path(env, data))
+		return (perror("ENVIRONMENT ERROR"), EXIT_FAILURE);
+	// ft_print_cmd(data->cmd);
 	ft_pipclr(&data);
-	ft_printf("env: %s\n", *env);
 	return (EXIT_SUCCESS);
 }
