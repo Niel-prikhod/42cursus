@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   pipex_main.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 06:00:34 by dprikhod          #+#    #+#             */
-/*   Updated: 2025/10/25 20:18:22 by dprikhod         ###   ########.fr       */
+/*   Updated: 2025/10/27 11:44:52 by dprikhod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	parse_cmd(int argc, char **argv, t_pipex *data)
 	}
 }
 
-void	ft_pipclr(t_pipex **data)
+void	ft_pipex_clear(t_pipex **data)
 {
 	ft_lstclear(&((*data)->cmd), ft_clr_split);
 	close((*data)->infile);
@@ -52,16 +52,23 @@ void	ft_print_cmd(t_list *cmd)
 
 bool	parse_path(char **env, t_pipex *data)
 {
+	char	*str;
+
+	str = NULL;
 	while (env)
 	{
 		if (ft_strnstr(*env, "PATH", 4) == *env)
 		{
-			data->path = *env + 5;
-			return (true);
+			str = *env + 5;
+			break ;
 		}
 		env++;
 	}
-	return (false);
+	if (!str)
+		return (false);
+	data->path = ft_split(str, ':');
+	ft_print_split(data->path);
+	return (true);
 }
 
 int	main(int argc, char **argv, char **env)
@@ -80,7 +87,8 @@ int	main(int argc, char **argv, char **env)
 	parse_cmd(argc, argv, data);
 	if (!parse_path(env, data))
 		return (perror("ENVIRONMENT ERROR"), EXIT_FAILURE);
+	// ft_exec_cmd(*data);
 	// ft_print_cmd(data->cmd);
-	ft_pipclr(&data);
+	ft_pipex_clear(&data);
 	return (EXIT_SUCCESS);
 }

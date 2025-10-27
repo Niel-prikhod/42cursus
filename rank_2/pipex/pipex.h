@@ -6,7 +6,7 @@
 /*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 06:01:59 by dprikhod          #+#    #+#             */
-/*   Updated: 2025/10/25 20:16:18 by dprikhod         ###   ########.fr       */
+/*   Updated: 2025/10/27 11:05:09 by dprikhod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,10 @@ typedef struct s_pipex
 	t_list	*cmd;
 	int		infile;
 	int		outfile;
-	char	*path;
+	char	**path;
 }			t_pipex;
+
+// pipex_execution.c
+bool		ft_exec_cmd(t_pipex data);
 
 #endif
