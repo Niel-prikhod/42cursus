@@ -4,7 +4,7 @@ CFLAGS = -Wextra -Wall -Werror -O3 -g3 -I. -I$(LIBFT)
 
 NAME = pipex
 
-SOURCES = pipex_main.c
+SOURCES = pipex_main.c pipex_execution.c pipex_utils.c
 
 BUILD = build
 OBJECTS = $(addprefix $(BUILD)/, $(SOURCES:.c=.o))

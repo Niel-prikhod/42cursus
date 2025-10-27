@@ -6,7 +6,7 @@
 /*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 06:00:34 by dprikhod          #+#    #+#             */
-/*   Updated: 2025/10/27 11:44:52 by dprikhod         ###   ########.fr       */
+/*   Updated: 2025/10/27 21:18:13 by dprikhod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ bool	parse_path(char **env, t_pipex *data)
 	if (!str)
 		return (false);
 	data->path = ft_split(str, ':');
-	ft_print_split(data->path);
+	// ft_print_split(data->path);
 	return (true);
 }
 
@@ -76,7 +76,7 @@ int	main(int argc, char **argv, char **env)
 	t_pipex	*data;
 
 	if (argc < 5)
-		return (INVALID_ARGS);
+		return (perror("INVALID ARGUMENT"), EXIT_FAILURE);
 	data = malloc(sizeof(t_pipex));
 	data->infile = open(argv[0], O_RDONLY);
 	if (data->infile < 0)
@@ -87,7 +87,8 @@ int	main(int argc, char **argv, char **env)
 	parse_cmd(argc, argv, data);
 	if (!parse_path(env, data))
 		return (perror("ENVIRONMENT ERROR"), EXIT_FAILURE);
-	// ft_exec_cmd(*data);
+	if (!ft_pipes_handler(data, env))
+		return (ft_pipex_clear(&data), EXIT_FAILURE);
 	// ft_print_cmd(data->cmd);
 	ft_pipex_clear(&data);
 	return (EXIT_SUCCESS);
