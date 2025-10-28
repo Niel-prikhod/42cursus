@@ -6,12 +6,11 @@
 /*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 06:00:34 by dprikhod          #+#    #+#             */
-/*   Updated: 2025/10/28 10:59:41 by dprikhod         ###   ########.fr       */
+/*   Updated: 2025/10/28 13:48:32 by dprikhod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-#include <stdlib.h>
 
 void	parse_cmd(int argc, char **argv, t_pipex *data)
 {
@@ -79,10 +78,10 @@ int	main(int argc, char **argv, char **env)
 	if (argc < 5)
 		return (perror("INVALID ARGUMENT"), EXIT_FAILURE);
 	data = malloc(sizeof(t_pipex));
-	data->infile = open(argv[0], O_RDONLY);
+	data->infile = open(argv[1], O_RDONLY);
 	if (data->infile < 0)
 		return (perror("INFILE ERROR"), EXIT_FAILURE);
-	data->outfile = open(argv[argc - 1], O_TRUNC | O_WRONLY | O_CREAT);
+	data->outfile = open(argv[argc - 1], O_TRUNC | O_WRONLY | O_CREAT, 0777);
 	if (data->outfile < 0)
 		return (perror("OUTFILE ERROR"), EXIT_FAILURE);
 	parse_cmd(argc, argv, data);

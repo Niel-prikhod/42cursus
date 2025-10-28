@@ -6,12 +6,11 @@
 /*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 10:58:30 by dprikhod          #+#    #+#             */
-/*   Updated: 2025/10/28 12:19:40 by dprikhod         ###   ########.fr       */
+/*   Updated: 2025/10/28 13:43:48 by dprikhod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-#include <stdio.h>
 
 char	*ft_get_path(char **path, char *arg)
 {
@@ -40,7 +39,7 @@ bool	ft_exec_cmd(int *fd, char **path, char **argv, char **envp)
 		return (perror("CHANGING_OUTPUT_ERROR"), false);
 	close(fd[1]);
 	argv[0] = ft_get_path(path, argv[0]);
-	ft_print_split(argv);
+	// ft_print_split(argv);
 	if (execve(argv[0], argv, envp))
 		// if (execve("/usr/bin/cat", "usr/bin/cat", envp)
 		return (perror("EXEC_ERROR"), false);
