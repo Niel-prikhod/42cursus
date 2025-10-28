@@ -6,7 +6,7 @@
 /*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 06:00:34 by dprikhod          #+#    #+#             */
-/*   Updated: 2025/10/27 21:18:13 by dprikhod         ###   ########.fr       */
+/*   Updated: 2025/10/28 10:59:41 by dprikhod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	parse_cmd(int argc, char **argv, t_pipex *data)
 void	ft_pipex_clear(t_pipex **data)
 {
 	ft_lstclear(&((*data)->cmd), ft_clr_split);
+	ft_clr_split((*data)->path);
 	close((*data)->infile);
 	close((*data)->outfile);
 	free(*data);
@@ -81,9 +82,9 @@ int	main(int argc, char **argv, char **env)
 	data->infile = open(argv[0], O_RDONLY);
 	if (data->infile < 0)
 		return (perror("INFILE ERROR"), EXIT_FAILURE);
-	// data->outfile = open(argv[argc - 1], O_TRUNC | O_WRONLY | O_CREAT);
-	// if (data->outfile < 0)
-	//	return (perror("OUTFILE ERROR"), EXIT_FAILURE);
+	data->outfile = open(argv[argc - 1], O_TRUNC | O_WRONLY | O_CREAT);
+	if (data->outfile < 0)
+		return (perror("OUTFILE ERROR"), EXIT_FAILURE);
 	parse_cmd(argc, argv, data);
 	if (!parse_path(env, data))
 		return (perror("ENVIRONMENT ERROR"), EXIT_FAILURE);
