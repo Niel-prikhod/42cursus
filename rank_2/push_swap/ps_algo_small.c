@@ -6,7 +6,7 @@
 /*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/05 19:41:00 by dprikhod          #+#    #+#             */
-/*   Updated: 2025/10/05 19:41:22 by dprikhod         ###   ########.fr       */
+/*   Updated: 2025/12/26 13:06:08 by dprikhod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,6 @@ static void	find_smallest(t_stack **a, t_stack **b, int size)
 
 void	ft_sort_small(t_stack **a, t_stack **b, int size)
 {
-	if (size <= 1 || ft_is_sorted(*a))
-		return ;
 	if (size == 2)
 		swap(a, 'a');
 	else if (size == 3)

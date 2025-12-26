@@ -6,19 +6,17 @@
 /*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 17:10:31 by dprikhod          #+#    #+#             */
-/*   Updated: 2025/10/07 17:54:16 by dprikhod         ###   ########.fr       */
+/*   Updated: 2025/12/26 13:06:51 by dprikhod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	sort_main(t_stack **a)
+static void	sort_main(t_stack **a, int size)
 {
-	int		size;
 	t_stack	*b;
 
 	b = NULL;
-	size = ft_stack_size(*a);
 	if (size < 2 || ft_is_sorted(*a))
 		return ;
 	else if (size <= 5)
@@ -41,7 +39,7 @@ int	main(int argc, char *argv[])
 		return (print_err(), 1);
 	size = ft_stack_size(a);
 	normalize(&a, size);
-	sort_main(&a);
+	sort_main(&a, size);
 	ft_stack_clear(&a);
 	return (0);
 }
