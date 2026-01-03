@@ -1,0 +1,4 @@
+[submodule "rank_2/push_swap"]
+	path = rank_2/push_swap
+	url = git@github.com:Niel-prikhod/push_swap.git
+	branch = main
