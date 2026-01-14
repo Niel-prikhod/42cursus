@@ -34,5 +34,9 @@ fclean: clean
 
 re: fclean all
 
+test: re
+	./pipex in.txt "cat" "wc -l" out.txt
+	cat out.txt
+
 .PHONY: all clean fclean re
 
