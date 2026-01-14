@@ -8,3 +8,4 @@
 /rank_2/pipex/in.txt
 compile_commands.json
 trace.log
+.cache
