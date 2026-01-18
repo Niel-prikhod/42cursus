@@ -6,7 +6,7 @@
 /*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 06:00:34 by dprikhod          #+#    #+#             */
-/*   Updated: 2025/10/28 13:48:32 by dprikhod         ###   ########.fr       */
+/*   Updated: 2026/01/18 12:02:20 by dprikhod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,12 @@ void	ft_print_cmd(t_list *cmd)
 	}
 }
 
-bool	parse_path(char **env, t_pipex *data)
+bool	parse_path(t_pipex *data)
 {
 	char	*str;
+	char	**env;
 
+	env = data->env;
 	str = NULL;
 	while (env)
 	{
@@ -67,7 +69,6 @@ bool	parse_path(char **env, t_pipex *data)
 	if (!str)
 		return (false);
 	data->path = ft_split(str, ':');
-	// ft_print_split(data->path);
 	return (true);
 }
 
@@ -84,10 +85,11 @@ int	main(int argc, char **argv, char **env)
 	data->outfile = open(argv[argc - 1], O_TRUNC | O_WRONLY | O_CREAT, 0777);
 	if (data->outfile < 0)
 		return (perror("OUTFILE ERROR"), EXIT_FAILURE);
+	data->env = env;
 	parse_cmd(argc, argv, data);
-	if (!parse_path(env, data))
+	if (!parse_path(data))
 		return (perror("ENVIRONMENT ERROR"), EXIT_FAILURE);
-	if (!ft_pipes_handler(data, env))
+	if (!ft_pipes_handler(data))
 		return (ft_pipex_clear(&data), EXIT_FAILURE);
 	// ft_print_cmd(data->cmd);
 	ft_pipex_clear(&data);
