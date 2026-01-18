@@ -6,16 +6,16 @@
 /*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 10:58:30 by dprikhod          #+#    #+#             */
-/*   Updated: 2026/01/18 13:27:35 by dprikhod         ###   ########.fr       */
+/*   Updated: 2026/01/18 19:50:28 by dprikhod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-char *ft_get_path(char **path, char *arg)
+char	*ft_get_path(char **path, char *arg)
 {
-	char *new_path;
-	int   i;
+	char	*new_path;
+	int		i;
 
 	i = 0;
 	while (path[i])
@@ -28,9 +28,9 @@ char *ft_get_path(char **path, char *arg)
 	return (NULL);
 }
 
-void ft_handle_child(int *fd, t_pipex *data, char **argv, int unused_end)
+void	ft_handle_child(int *fd, t_pipex *data, char **argv, int unused_end)
 {
-	char *new_path;
+	char	*new_path;
 
 	close(unused_end);
 	if (dup2(fd[0], STDIN_FILENO) < 0)
@@ -46,9 +46,9 @@ void ft_handle_child(int *fd, t_pipex *data, char **argv, int unused_end)
 		return (ft_putstr_fd("EXEC_ERROR", 2), exit(EXIT_FAILURE));
 }
 
-bool create_pipe(t_pipex *data, int cmd_pipe[2][2])
+bool	create_pipe(t_pipex *data, int cmd_pipe[2][2])
 {
-	int fd[2];
+	int	fd[2];
 
 	if (pipe(fd) == -1)
 		return (ft_putstr_fd("PIPE_ERROR", 2), false);
@@ -59,12 +59,33 @@ bool create_pipe(t_pipex *data, int cmd_pipe[2][2])
 	return (true);
 }
 
-bool ft_pipes_handler(t_pipex *data)
+bool	good_father(int *pid)
 {
-	int     pid[2];
-	int     cmd_pipe[2][2];
-	int     i;
-	t_list *command;
+	bool	success;
+	int		i;
+	int		status[2];
+
+	success = true;
+	i = 0;
+	while (i < 2)
+	{
+		waitpid(pid[i], &status[i], 0);
+		if (!WIFEXITED(status[i]) || WEXITSTATUS(status[i]) != 0)
+		{
+			ft_putstr_fd("Child process failed", 2);
+			success = false;
+		}
+		i++;
+	}
+	return (success);
+}
+
+bool	ft_pipes_handler(t_pipex *data)
+{
+	int		pid[2];
+	int		cmd_pipe[2][2];
+	int		i;
+	t_list	*command;
 
 	if (!create_pipe(data, cmd_pipe))
 		return (false);
@@ -76,13 +97,12 @@ bool ft_pipes_handler(t_pipex *data)
 		if (pid[i] < 0)
 			return (ft_putstr_fd("FORK_ERROR", 2), false);
 		if (pid[i] == 0)
-			ft_handle_child(cmd_pipe[i], data, command->content, cmd_pipe[(i + 1) % 2][i]);
+			ft_handle_child(cmd_pipe[i], data, command->content, cmd_pipe[(i
+					+ 1) % 2][i]);
 		command = command->next;
 		i++;
 	}
 	close(cmd_pipe[0][1]);
 	close(cmd_pipe[1][0]);
-	waitpid(pid[0], NULL, 0);
-	waitpid(pid[1], NULL, 0);
-	return (true);
+	return (good_father(pid));
 }
