@@ -35,8 +35,24 @@ fclean: clean
 re: fclean all
 
 test: re
-	./pipex in.txt "cat" "wc -l" out.txt
+	./pipex in.txt cat 'wc -l' out.txt
 	cat out.txt
 
-.PHONY: all clean fclean re
+# Comprehensive test suite targets
+test-all: re
+	@cd tests && ./test_pipex.sh
+
+test-basic: re
+	@cd tests && ./test_pipex.sh --basic-only
+
+test-errors: re
+	@cd tests && ./test_pipex.sh --errors-only
+
+test-verbose: re
+	@cd tests && ./test_pipex.sh -v
+
+test-clean: re
+	@cd tests && ./test_pipex.sh -c
+
+.PHONY: all clean fclean re test test-all test-basic test-errors test-verbose test-clean
 
