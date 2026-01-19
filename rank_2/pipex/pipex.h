@@ -6,7 +6,7 @@
 /*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 06:01:59 by dprikhod          #+#    #+#             */
-/*   Updated: 2026/01/18 12:02:56 by dprikhod         ###   ########.fr       */
+/*   Updated: 2026/01/19 10:41:52 by dprikhod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,7 @@ bool		ft_pipes_handler(t_pipex *data);
 
 // pipex_utils.c
 char		*ft_pathjoin(char *path, char *cmd);
+void		ft_pipex_clear(t_pipex **data);
+int			failure_close(char *msg, t_pipex **data);
 
 #endif

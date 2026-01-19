@@ -6,7 +6,7 @@
 /*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 06:00:34 by dprikhod          #+#    #+#             */
-/*   Updated: 2026/01/19 10:21:13 by dprikhod         ###   ########.fr       */
+/*   Updated: 2026/01/19 10:48:11 by dprikhod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,6 @@ void	parse_cmd(int argc, char **argv, t_pipex *data)
 		ft_lstadd_back(&(data->cmd), fts);
 		i++;
 	}
-}
-
-void	ft_pipex_clear(t_pipex **data)
-{
-	ft_lstclear(&((*data)->cmd), ft_clr_split);
-	ft_clr_split((*data)->path);
-	close((*data)->infile);
-	close((*data)->outfile);
-	free(*data);
 }
 
 void	ft_print_cmd(t_list *cmd)
@@ -77,20 +68,20 @@ int	main(int argc, char **argv, char **env)
 	t_pipex	*data;
 
 	if (argc < 5)
-		return (ft_putstr_fd("INVALID ARGUMENT", 2), EXIT_FAILURE);
+		return (failure_close("INVALID ARGUMENT", &data));
 	data = malloc(sizeof(t_pipex));
 	data->infile = open(argv[1], O_RDONLY);
 	if (data->infile < 0)
-		return (ft_putstr_fd("INFILE ERROR", 2), EXIT_FAILURE);
+		return (failure_close("INFILE ERROR", &data));
 	data->outfile = open(argv[argc - 1], O_TRUNC | O_WRONLY | O_CREAT, 0777);
 	if (data->outfile < 0)
-		return (ft_putstr_fd("OUTFILE ERROR", 2), EXIT_FAILURE);
+		return (failure_close("OUTFILE ERROR", &data));
 	data->env = env;
 	parse_cmd(argc, argv, data);
 	if (!parse_path(data))
-		return (ft_putstr_fd("ENVIRONMENT ERROR", 2), EXIT_FAILURE);
+		return (failure_close("ENVIRONMENT ERROR", &data));
 	if (!ft_pipes_handler(data))
-		return (ft_pipex_clear(&data), EXIT_FAILURE);
+		return (failure_close(NULL, &data));
 	ft_pipex_clear(&data);
 	return (EXIT_SUCCESS);
 }
