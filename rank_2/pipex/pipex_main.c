@@ -6,7 +6,7 @@
 /*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 06:00:34 by dprikhod          #+#    #+#             */
-/*   Updated: 2026/01/19 10:48:11 by dprikhod         ###   ########.fr       */
+/*   Updated: 2026/01/19 11:22:45 by dprikhod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,22 +66,24 @@ bool	parse_path(t_pipex *data)
 int	main(int argc, char **argv, char **env)
 {
 	t_pipex	*data;
+	int		exit_code;
 
 	if (argc < 5)
-		return (failure_close("INVALID ARGUMENT", &data));
+		return (failure_close("INVALID ARGUMENT", &data, EXIT_FAILURE));
 	data = malloc(sizeof(t_pipex));
 	data->infile = open(argv[1], O_RDONLY);
 	if (data->infile < 0)
-		return (failure_close("INFILE ERROR", &data));
+		return (failure_close("INFILE ERROR", &data, EXIT_FAILURE));
 	data->outfile = open(argv[argc - 1], O_TRUNC | O_WRONLY | O_CREAT, 0777);
 	if (data->outfile < 0)
-		return (failure_close("OUTFILE ERROR", &data));
+		return (failure_close("OUTFILE ERROR", &data, EXIT_FAILURE));
 	data->env = env;
 	parse_cmd(argc, argv, data);
 	if (!parse_path(data))
-		return (failure_close("ENVIRONMENT ERROR", &data));
-	if (!ft_pipes_handler(data))
-		return (failure_close(NULL, &data));
+		return (failure_close("ENVIRONMENT ERROR", &data, EXIT_FAILURE));
+	exit_code = ft_pipes_handler(data);
+	if (exit_code != 0)
+		return (failure_close(NULL, &data, exit_code));
 	ft_pipex_clear(&data);
 	return (EXIT_SUCCESS);
 }

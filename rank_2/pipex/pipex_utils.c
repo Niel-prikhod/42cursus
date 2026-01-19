@@ -6,7 +6,7 @@
 /*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 18:39:20 by dprikhod          #+#    #+#             */
-/*   Updated: 2026/01/19 10:43:51 by dprikhod         ###   ########.fr       */
+/*   Updated: 2026/01/19 11:18:00 by dprikhod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,10 @@ void	ft_pipex_clear(t_pipex **data)
 	free(*data);
 }
 
-int	failure_close(char *msg, t_pipex **data)
+int	failure_close(char *msg, t_pipex **data, int exit_code)
 {
 	if (msg)
 		ft_putstr_fd(msg, 2);
 	ft_pipex_clear(data);
-	return (EXIT_FAILURE);
+	return (exit_code);
 }
