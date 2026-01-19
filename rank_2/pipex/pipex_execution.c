@@ -6,7 +6,7 @@
 /*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 10:58:30 by dprikhod          #+#    #+#             */
-/*   Updated: 2026/01/19 13:32:20 by dprikhod         ###   ########.fr       */
+/*   Updated: 2026/01/19 13:58:06 by dprikhod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,8 @@ int	good_father(int *pid)
 	while (i < 2)
 	{
 		waitpid(pid[i], &status[i], 0);
-		if (WIFEXITED(status[i]) && WEXITSTATUS(status[i]) != 0)
-		{
-			ft_putstr_fd("CHILD_PROCESS_FAILURE", 2);
+		if (WIFEXITED(status[i]))
 			exit_code = WEXITSTATUS(status[i]);
-		}
 		i++;
 	}
 	return (exit_code);

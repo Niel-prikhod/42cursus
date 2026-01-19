@@ -6,7 +6,7 @@
 /*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 18:39:20 by dprikhod          #+#    #+#             */
-/*   Updated: 2026/01/19 11:18:00 by dprikhod         ###   ########.fr       */
+/*   Updated: 2026/01/19 13:50:00 by dprikhod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,16 @@ char	*ft_pathjoin(char *path, char *cmd)
 	ft_strlcpy(new_path, path, path_size + 1);
 	new_path[path_size] = '/';
 	ft_strlcpy(&new_path[path_size + 1], cmd, cmd_size + 1);
-	// ft_printf("%s\n", new_path);
 	free(path);
 	return (new_path);
 }
 
 void	ft_pipex_clear(t_pipex **data)
 {
-	ft_lstclear(&((*data)->cmd), ft_clr_split);
-	ft_clr_split((*data)->path);
+	if ((*data)->cmd != NULL)
+		ft_lstclear(&((*data)->cmd), ft_clr_split);
+	if ((*data)->path)
+		ft_clr_split((*data)->path);
 	close((*data)->infile);
 	close((*data)->outfile);
 	free(*data);

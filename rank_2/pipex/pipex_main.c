@@ -6,7 +6,7 @@
 /*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 06:00:34 by dprikhod          #+#    #+#             */
-/*   Updated: 2026/01/19 13:32:36 by dprikhod         ###   ########.fr       */
+/*   Updated: 2026/01/19 13:48:45 by dprikhod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,8 @@ int	main(int argc, char **argv, char **env)
 	t_pipex	*data;
 	int		exit_code;
 
-	if (argc < 5)
-		return (failure_close("INVALID ARGUMENT", &data, EXIT_FAILURE));
+	if (argc != 5)
+		return (ft_putstr_fd("INVALID ARGUMENT", 2), EXIT_FAILURE);
 	data = malloc(sizeof(t_pipex));
 	data->infile = open(argv[1], O_RDONLY);
 	if (data->infile < 0)
