@@ -6,7 +6,7 @@
 /*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 10:58:30 by dprikhod          #+#    #+#             */
-/*   Updated: 2026/01/19 13:58:06 by dprikhod         ###   ########.fr       */
+/*   Updated: 2026/01/19 17:04:56 by dprikhod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ char	*ft_get_path(char **path, char *arg)
 	{
 		new_path = ft_pathjoin(path[i], arg);
 		if (!access(new_path, X_OK))
-			return (free(arg), new_path);
+			return (new_path);
+		free(new_path);
 		i++;
 	}
 	return (NULL);
