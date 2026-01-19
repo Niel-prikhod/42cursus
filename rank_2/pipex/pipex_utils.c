@@ -6,7 +6,7 @@
 /*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 18:39:20 by dprikhod          #+#    #+#             */
-/*   Updated: 2026/01/19 13:50:00 by dprikhod         ###   ########.fr       */
+/*   Updated: 2026/01/19 14:13:14 by dprikhod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,10 @@ void	ft_pipex_clear(t_pipex **data)
 		ft_lstclear(&((*data)->cmd), ft_clr_split);
 	if ((*data)->path)
 		ft_clr_split((*data)->path);
-	close((*data)->infile);
-	close((*data)->outfile);
+	if ((*data)->infile >= 0)
+		close((*data)->infile);
+	if ((*data)->outfile >= 0)
+		close((*data)->outfile);
 	free(*data);
 }
 
@@ -47,4 +49,19 @@ int	failure_close(char *msg, t_pipex **data, int exit_code)
 		ft_putstr_fd(msg, 2);
 	ft_pipex_clear(data);
 	return (exit_code);
+}
+
+t_pipex	*init_pipex(char **env)
+{
+	t_pipex	*data;
+
+	data = malloc(sizeof(t_pipex));
+	if (!data)
+		return (NULL);
+	data->cmd = NULL;
+	data->env = env;
+	data->path = NULL;
+	data->outfile = -1;
+	data->infile = -1;
+	return (data);
 }

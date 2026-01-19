@@ -12,10 +12,10 @@
 
 #include "pipex.h"
 
-char	*ft_get_path(char **path, char *arg)
+char *ft_get_path(char **path, char *arg)
 {
-	char	*new_path;
-	int		i;
+	char *new_path;
+	int   i;
 
 	i = 0;
 	while (path[i])
@@ -28,9 +28,9 @@ char	*ft_get_path(char **path, char *arg)
 	return (NULL);
 }
 
-void	ft_handle_child(int *fd, t_pipex *data, char **argv, int unused_end)
+void ft_handle_child(int *fd, t_pipex *data, char **argv, int unused_end)
 {
-	char	*new_path;
+	char *new_path;
 
 	close(unused_end);
 	if (dup2(fd[0], STDIN_FILENO) < 0)
@@ -46,9 +46,9 @@ void	ft_handle_child(int *fd, t_pipex *data, char **argv, int unused_end)
 		return (ft_putstr_fd("EXEC_ERROR", 2), exit(EXIT_FAILURE));
 }
 
-bool	create_pipe(t_pipex *data, int cmd_pipe[2][2])
+bool create_pipe(t_pipex *data, int cmd_pipe[2][2])
 {
-	int	fd[2];
+	int fd[2];
 
 	if (pipe(fd) == -1)
 		return (ft_putstr_fd("PIPE_ERROR", 2), false);
@@ -59,30 +59,30 @@ bool	create_pipe(t_pipex *data, int cmd_pipe[2][2])
 	return (true);
 }
 
-int	good_father(int *pid)
+int good_father(int *pid)
 {
-	int	exit_code;
-	int	i;
-	int	status[2];
+	int exit_code;
+	int i;
+	int status[2];
 
 	exit_code = 0;
 	i = 0;
 	while (i < 2)
 	{
 		waitpid(pid[i], &status[i], 0);
-		if (WIFEXITED(status[i]))
+		if (WIFEXITED(status[i]) && WEXITSTATUS(status[i]) != 0)
 			exit_code = WEXITSTATUS(status[i]);
 		i++;
 	}
 	return (exit_code);
 }
 
-int	ft_pipes_handler(t_pipex *data)
+int ft_pipes_handler(t_pipex *data)
 {
-	int		pid[2];
-	int		cmd_pipe[2][2];
-	int		i;
-	t_list	*command;
+	int     pid[2];
+	int     cmd_pipe[2][2];
+	int     i;
+	t_list *command;
 
 	if (!create_pipe(data, cmd_pipe))
 		return (EXIT_FAILURE);
@@ -94,8 +94,7 @@ int	ft_pipes_handler(t_pipex *data)
 		if (pid[i] < 0)
 			return (ft_putstr_fd("FORK_ERROR", 2), EXIT_FAILURE);
 		if (pid[i] == 0)
-			ft_handle_child(cmd_pipe[i], data, command->content, cmd_pipe[(i
-					+ 1) % 2][i]);
+			ft_handle_child(cmd_pipe[i], data, command->content, cmd_pipe[(i + 1) % 2][i]);
 		command = command->next;
 		i++;
 	}

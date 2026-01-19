@@ -6,7 +6,7 @@
 /*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 06:00:34 by dprikhod          #+#    #+#             */
-/*   Updated: 2026/01/19 13:48:45 by dprikhod         ###   ########.fr       */
+/*   Updated: 2026/01/19 14:14:38 by dprikhod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,14 +70,15 @@ int	main(int argc, char **argv, char **env)
 
 	if (argc != 5)
 		return (ft_putstr_fd("INVALID ARGUMENT", 2), EXIT_FAILURE);
-	data = malloc(sizeof(t_pipex));
+	data = init_pipex(env);
+	if (!data)
+		return (ft_putstr_fd("MALLOC ERROR", 2), EXIT_FAILURE);
 	data->infile = open(argv[1], O_RDONLY);
 	if (data->infile < 0)
 		return (failure_close("INFILE ERROR", &data, EXIT_FAILURE));
 	data->outfile = open(argv[argc - 1], O_TRUNC | O_WRONLY | O_CREAT, 0777);
 	if (data->outfile < 0)
 		return (failure_close("OUTFILE ERROR", &data, EXIT_FAILURE));
-	data->env = env;
 	parse_cmd(argc, argv, data);
 	if (!parse_path(data))
 		return (failure_close("ENVIRONMENT ERROR", &data, EXIT_FAILURE));
