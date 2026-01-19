@@ -6,7 +6,7 @@
 /*   By: dprikhod <dprikhod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 06:00:34 by dprikhod          #+#    #+#             */
-/*   Updated: 2026/01/19 14:14:38 by dprikhod         ###   ########.fr       */
+/*   Updated: 2026/01/19 16:33:02 by dprikhod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,10 @@ int	main(int argc, char **argv, char **env)
 		return (ft_putstr_fd("MALLOC ERROR", 2), EXIT_FAILURE);
 	data->infile = open(argv[1], O_RDONLY);
 	if (data->infile < 0)
-		return (failure_close("INFILE ERROR", &data, EXIT_FAILURE));
+	{
+		ft_putstr_fd("INPUTFILE ERROR\n", 2);
+		data->infile = open("/dev/null", O_RDONLY);
+	}
 	data->outfile = open(argv[argc - 1], O_TRUNC | O_WRONLY | O_CREAT, 0777);
 	if (data->outfile < 0)
 		return (failure_close("OUTFILE ERROR", &data, EXIT_FAILURE));

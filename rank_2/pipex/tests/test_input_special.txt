@@ -1,0 +1,8 @@
+Line with UPPERCASE letters
+line with lowercase letters
+Line with MiXeD CaSe
+Special chars: !@#$%^&*()
+Numbers: 123 456 789
+Tabs	and		spacees
+Newlines
+and carriage returns
