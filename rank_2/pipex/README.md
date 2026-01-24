@@ -54,10 +54,10 @@ A comprehensive test suite is available in the `tests/` directory. You can run i
 - linux user manual
 
 ### AI Usage
+Different models of Grok and opencode's Zen models were used.
 AI was utilized in this project for the following tasks:
 - **Test Suite Development**: Designing and implementing the comprehensive Bash test script located in `tests/`.
 - **Debugging**: Analyzing pipe deadlocks, race conditions, and file descriptor management issues.
 - **Code Optimization**: Refactoring functions for better readability and compliance with 42 school standards (Norminette).
 - **Error Handling Analysis**: Investigating `errno` behavior and improving error message routing to `stderr`.
 - **Documentation**: Drafting this README and other technical guides.
-Different models of Grok and opencode's Zen models were used.
